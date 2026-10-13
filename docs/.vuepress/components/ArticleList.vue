@@ -12,7 +12,7 @@ defineProps({
 
 <template>
   <div class="article-wrapper">
-    <div v-if="!items.length">Nothing in here.</div>
+    <div v-if="!items.length">記事はまだありません。</div>
 
     <article
       v-for="{ info, path } in items"
@@ -22,7 +22,7 @@ defineProps({
     >
       <header class="title">
         {{
-          (isTimeline ? `${new Date(info.date).toLocaleDateString()}: ` : '') +
+          (isTimeline ? `${new Date(info.date).toLocaleDateString('ja-JP')}: ` : '') +
           info.title
         }}
       </header>
@@ -30,17 +30,20 @@ defineProps({
       <hr />
 
       <div class="article-info">
-        <span v-if="info.author" class="author">Author: {{ info.author }}</span>
+        <span v-if="info.author" class="author">執筆者: {{ info.author }}</span>
 
         <span v-if="info.date && !isTimeline" class="date"
-          >Date: {{ new Date(info.date).toLocaleDateString() }}</span
+          >公開日: {{ new Date(info.date).toLocaleDateString('ja-JP') }}</span
         >
 
-        <span v-if="info.category" class="category"
-          >Category: {{ info.category.join(', ') }}</span
+        <span v-if="info.category?.length" class="category"
+          >カテゴリー: {{ info.category.join(', ') }}</span
         >
 
-        <span v-if="info.tag" class="tag">Tag: {{ info.tag.join(', ') }}</span>
+        <span v-if="info.tag?.length" class="tag">タグ: {{ info.tag.join(', ') }}</span>
+        <span v-if="info.readingTime" class="reading-time">
+          読了目安: {{ Math.max(1, Math.ceil(info.readingTime.minutes)) }}分
+        </span>
       </div>
 
       <div v-if="info.excerpt" class="excerpt" v-html="info.excerpt" />
@@ -111,6 +114,7 @@ defineProps({
 
   .article-info {
     display: flex;
+    flex-wrap: wrap;
     flex-shrink: 0;
 
     > span {

@@ -2,7 +2,7 @@
 
 ## Project and entry points
 
-This is a VuePress 2 static documentation/blog site using Vue 3, the Vite bundler, the default VuePress theme, and `@vuepress/plugin-blog`. There is no separate application server in the project sources. The homepage and posts currently contain VuePress starter/sample content; the package name is `virtual-ict-lab`, but the configured site title remains `VuePress`.
+This is a Japanese VuePress 2 static documentation/blog site using Vue 3, the Vite bundler, the default VuePress theme, and `@vuepress/plugin-blog`. There is no separate application server in the project sources. The package name is `virtual-ict-lab` and the configured site title is `Virtual ICT Lab`. The initial blog content is a single Markdown template in `docs/posts/welcome.md`.
 
 Read only the entry points relevant to the change:
 
@@ -50,6 +50,20 @@ The original VuePress/bundler pins at `2.0.0-rc.20` caused a production build fa
 
 The navbar links to `/article/`, `/category/`, `/tag/`, and `/timeline/`; these are generated blog pages, not Markdown files to create manually. Homepage actions also link to `/get-started.html`. Keep navigation, plugin keys, and layout registrations consistent when changing routes or adding a view.
 
+## Plugins and color themes
+
+`config.js` enables SlimSearch, Shiki, Markdown Chart, Markdown Math (KaTeX), Markdown Enhance (code demos), Reading Time, PhotoSwipe, Feed, PWA, and Redirect as standalone plugins. Copy Code, Markdown Hint (`hint`), Markdown Tab (`tab`), NProgress, Sitemap, SEO, and Git are configured through `defaultTheme({ themePlugins })`; do not register them a second time. PrismJS is disabled to avoid competing with Shiki, and Medium Zoom is disabled in favor of PhotoSwipe. SEO, Sitemap, and Feed use the published hostname `https://virtual-ict-lab.github.io/`.
+
+Shiki uses `catppuccin-latte` for light mode and `catppuccin-mocha` for dark mode. Its language list is explicit; add languages there when needed. The default theme UI uses matching CSS variable overrides in `docs/.vuepress/styles/index.scss`, loaded automatically by VuePress. Keep both UI palettes and syntax themes aligned.
+
+Markdown Chart enables Chart.js, ECharts, and Mermaid, with their rendering dependencies installed directly. Script execution inside chart definitions remains disabled by default. Markdown tabs and code tabs are enabled. Links Check is explicitly disabled at the user's request, so illustrative links in the Markdown template do not block builds. Git metadata requires repository history; CI checks out full history.
+
+Vite SSR must keep `@vuepress/search-helper` in `ssr.noExternal`: otherwise SlimSearch causes static rendering to fail with an unknown `.css` extension. Successful builds currently emit upstream warnings about `worker/dev.js` and large chunks; these do not prevent search index, sitemap, or page generation.
+
+Mermaid is included in Vite's `optimizeDeps` so its CommonJS dependencies work in development. `client.js` corrects SlimSearch rc.137's development worker URL when it points to `dist/client/worker/dev.js`; the worker actually lives under `dist/worker/`. This workaround applies only in development and only to the affected URL.
+
+PWA icons are source assets under `docs/.vuepress/public/icons/`. The production build generates the manifest and service worker. Feed includes only posts and emits `rss.xml`, `atom.xml`, and `feed.json`. The redirect maps `/posts/article1.html` to `/posts/welcome.html`.
+
 ## Frontmatter contracts and subtle behavior
 
 - Use YAML arrays for `category` and `tag`, even for a single value. The shared renderer calls `.join(', ')`; strings would not satisfy that contract. Missing values become empty arrays in `getInfo`.
@@ -59,7 +73,7 @@ The navbar links to `/article/`, `/category/`, `/tag/`, and `/timeline/`; these 
 - Non-sticky article sorting is newest first for dated posts. The explicit missing-date branches put an undated post before a dated post; do not assume undated entries come last.
 - Timeline sorting is newest first and does not use sticky priority.
 - An `excerpt` string in frontmatter overrides automatic generation. `excerpt: false` disables generation, and homepage frontmatter (`home: true`) is also excluded from automatic excerpts. Otherwise the renderer uses the plugin's generated `data.excerpt`.
-- `docs/posts/sticky2.md` demonstrates the `<!-- more -->` excerpt separator.
+- `docs/posts/welcome.md` uses `<!-- more -->` after its introduction to keep the template's table of contents and examples out of article-card excerpts.
 - Excerpts render as HTML with `v-html`, not escaped text. Do not introduce untrusted raw HTML into excerpt metadata without addressing that rendering boundary.
 - Blog hot reload is enabled in `config.js`; the clean-cache development script is available if generated state becomes stale.
 
@@ -80,6 +94,6 @@ For content, configuration, or component changes, run the production build. For 
 - Timeline: YAML date inclusion, newest-first order, and archived-post behavior.
 - Layout/style changes: default-theme navigation and the narrow-screen rules present in the components.
 
-The existing Markdown posts provide examples of dated articles, archived posts, sticky priorities, categories/tags, and excerpt boundaries; they are content examples, not automated tests.
+The initial Markdown template provides examples of dates, categories/tags, excerpt boundaries, code blocks, tabs, hints, math, and Mermaid. It is a content example, not an automated test; it does not exercise archive or sticky ordering.
 
 The workflow runs on pushes and pull requests targeting `main`, and supports manual dispatch. Pull requests only validate the build; deployment is restricted to non-pull-request runs on `main`. The workflow installs with `npm ci`, builds with an 8192 MB Node heap limit, creates `docs/.vuepress/dist/.nojekyll`, and publishes `docs/.vuepress/dist` to `gh-pages` through `JamesIves/github-pages-deploy-action@v4`. There is no npm deploy script. The generated `dist` directory is the deployment artifact, not the source location for edits. The current site config does not set a custom `base`; check routing and deployment assumptions before moving the site beneath a URL subpath.
