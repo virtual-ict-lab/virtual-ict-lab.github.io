@@ -6,6 +6,41 @@
   "description": "ICTの学びと実践を共有するブログ",
   "items": [
     {
+      "title": "VuePress 自分流爆速構築ガイド(2026年版)",
+      "url": "https://virtual-ict-lab.github.io/posts/mothue/20261013-init-vuepress.html",
+      "id": "https://virtual-ict-lab.github.io/posts/mothue/20261013-init-vuepress.html",
+      "summary": "VuePress 自分流爆速構築ガイド(2026年版) 関連情報 この記事は執筆中です．今後随時更新されます． VuePressを構築してGitHub Pagesにデプロイしたので，手順をまとめておきます．VuePressを建てたい方の参考になると幸いです． 環境 node v26.10.0 npm 11.19.1 導入する npmで構築する場合です．...",
+      "content_html": "\n<div class=\"hint-container info\">\n<p class=\"hint-container-title\">関連情報</p>\n<p>この記事は執筆中です．今後随時更新されます．</p>\n</div>\n<p>VuePressを構築してGitHub Pagesにデプロイしたので，手順をまとめておきます．VuePressを建てたい方の参考になると幸いです．</p>\n\n<h2>環境</h2>\n<ul>\n<li>node v26.10.0</li>\n<li>npm 11.19.1</li>\n</ul>\n<h2>導入する</h2>\n<p><code>npm</code>で構築する場合です．<code>my-blog</code>の名前は好きな名前にできます．この名前で新規ディレクトリが作成されます．</p>\n<p>GitHub Pagesで公開する場合，ここは<code>your-github-id.github.io</code>にするといいでしょう．</p>\n<div class=\"code-block-with-title\">\n  <div class=\"code-block-title-bar\" data-title=\"Bash\">\n    <span>Bash</span>\n  </div>\n  <div class=\"language-bash\" data-highlighter=\"shiki\" data-ext=\"bash\" style=\"--shiki-light:#4c4f69;--shiki-dark:#cdd6f4;--shiki-light-bg:#eff1f5;--shiki-dark-bg:#1e1e2e\"><pre class=\"shiki shiki-themes catppuccin-latte catppuccin-mocha vp-code\"><code class=\"language-bash\"><span class=\"line\"><span style=\"--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#89B4FA;--shiki-dark-font-style:italic\">npm</span><span style=\"--shiki-light:#40A02B;--shiki-dark:#A6E3A1\"> init</span><span style=\"--shiki-light:#40A02B;--shiki-dark:#A6E3A1\"> vuepress</span><span style=\"--shiki-light:#40A02B;--shiki-dark:#A6E3A1\"> my-blog</span></span></code></pre>\n</div>\n</div><p>実行すると，何件か質問があります．迷いそうなところだけ挙げておきます：</p>\n<ul>\n<li><code>Which bundler do you want to use?</code> -&gt; <code>vite</code>がおすすめです．</li>\n<li><code>What type of project do you want to create?</code> -&gt; ここでは<code>blog</code>を選びます．</li>\n<li><code>Your project name</code> -&gt; 私はディレクトリ名とおなじにしています．良いのか悪いのかはわかりません</li>\n<li><code>Do you need a GitHub workflow to deploy docs on GitHub pages?</code> -&gt; <code>Y</code> を選びます．</li>\n</ul>\n<p>完了すると，依存関係などのインストールが始まるので，ちょっと待ちます．</p>\n<p><code>Successful Generated!</code>が出たら完璧です．</p>\n<p><code>Would you like to preview template now?</code>は．<code>Y</code>でテンプレートサーバーが動きますが，ここでは<code>n</code>でスキップしましょう．どうせあとで開きます．</p>\n<h2>設定と起動のテスト</h2>\n<p>先ほど作ったディレクトリに移動してください．\nちなみに，もし<code>vulnerabilities</code>の警告が出た場合，<code>npm audit fix --force</code>をしておきましょう．</p>\n<div class=\"code-block-with-title\">\n  <div class=\"code-block-title-bar\" data-title=\"Bash\">\n    <span>Bash</span>\n  </div>\n  <div class=\"language-bash\" data-highlighter=\"shiki\" data-ext=\"bash\" style=\"--shiki-light:#4c4f69;--shiki-dark:#cdd6f4;--shiki-light-bg:#eff1f5;--shiki-dark-bg:#1e1e2e\"><pre class=\"shiki shiki-themes catppuccin-latte catppuccin-mocha vp-code\"><code class=\"language-bash\"><span class=\"line\"><span style=\"--shiki-light:#D20F39;--shiki-light-font-style:italic;--shiki-dark:#F38BA8;--shiki-dark-font-style:italic\">cd</span><span style=\"--shiki-light:#40A02B;--shiki-dark:#A6E3A1\"> my-blog</span></span>\n<span class=\"line\"><span style=\"--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#89B4FA;--shiki-dark-font-style:italic\">npm</span><span style=\"--shiki-light:#40A02B;--shiki-dark:#A6E3A1\"> audit</span><span style=\"--shiki-light:#40A02B;--shiki-dark:#A6E3A1\"> fix</span><span style=\"--shiki-light:#40A02B;--shiki-dark:#A6E3A1\"> --force</span></span></code></pre>\n</div>\n</div><p>起動するかのテストをします．何も触っていなければ起動するはずです！</p>\n<p>開発用のホットリロード対応なviteサーバーが生えてきます：</p>\n<div class=\"code-block-with-title\">\n  <div class=\"code-block-title-bar\" data-title=\"Bash\">\n    <span>Bash</span>\n  </div>\n  <div class=\"language-bash\" data-highlighter=\"shiki\" data-ext=\"bash\" style=\"--shiki-light:#4c4f69;--shiki-dark:#cdd6f4;--shiki-light-bg:#eff1f5;--shiki-dark-bg:#1e1e2e\"><pre class=\"shiki shiki-themes catppuccin-latte catppuccin-mocha vp-code\"><code class=\"language-bash\"><span class=\"line\"><span style=\"--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#89B4FA;--shiki-dark-font-style:italic\">npm</span><span style=\"--shiki-light:#40A02B;--shiki-dark:#A6E3A1\"> run</span><span style=\"--shiki-light:#40A02B;--shiki-dark:#A6E3A1\"> docs:dev</span></span></code></pre>\n</div>\n</div><p>純粋にビルドが通るだけの確認はこちら：</p>\n<div class=\"code-block-with-title\">\n  <div class=\"code-block-title-bar\" data-title=\"Bash\">\n    <span>Bash</span>\n  </div>\n  <div class=\"language-bash\" data-highlighter=\"shiki\" data-ext=\"bash\" style=\"--shiki-light:#4c4f69;--shiki-dark:#cdd6f4;--shiki-light-bg:#eff1f5;--shiki-dark-bg:#1e1e2e\"><pre class=\"shiki shiki-themes catppuccin-latte catppuccin-mocha vp-code\"><code class=\"language-bash\"><span class=\"line\"><span style=\"--shiki-light:#1E66F5;--shiki-light-font-style:italic;--shiki-dark:#89B4FA;--shiki-dark-font-style:italic\">npm</span><span style=\"--shiki-light:#40A02B;--shiki-dark:#A6E3A1\"> run</span><span style=\"--shiki-light:#40A02B;--shiki-dark:#A6E3A1\"> docs:build</span></span></code></pre>\n</div>\n</div><h2>早速デプロイ</h2>\n<p>いよいよデプロイです．まず，このリポジトリをGitHubにアップロードしてください．すると，<code>workflows</code>の中のCI/CDが走って，自動でビルドされます．</p>\n<p>変なことをしていない限り，問題は起こらない（はず）です．問題が起きたらClaudeとかに聞いてください．</p>\n<p>CIが通ると，こんな感じに緑のチェックマークが出てきます．</p>\n<p><img src=\"/mothue/20261013-init-vuepress/0.png\" alt=\"CI/CDが成功した様子．最新のコミットメッセージの右に緑色のチェックマークが表示されている．\"></p>\n<p>ビルド通らなかった場合，赤色の❌表示になるので，クリックするとログが見れます．</p>\n<p>次に，GitHubの設定を開きます：</p>\n<p>Settings -&gt; Pages -&gt; Branchから，&quot;Branch&quot;の項目を開きます．</p>\n<p><img src=\"/mothue/20261013-init-vuepress/1.png\" alt=\"GitHub Pagesの公開するブランチの様子．ブランチの選択部分がに選択されている様子．\"></p>\n<p>ここの&quot;Branch&quot;が，デフォルトでは<code>main</code>になっていると思うので，ここを<code>gh-pages</code>にします．これで公開ができるようになるので，保存してから数分待つと，設定したドメイン（特にいじっていないなら<code>your-github-id.github.io</code>になっているはず）でアクセスができます．</p>\n<h2>まとめ</h2>\n<p>GitHub Pagesは神！なので全人類GitHub Pagesでオリジナルのブログを生やしましょう．</p>\n",
+      "image": "https://virtual-ict-lab.github.io/mothue/20261013-init-vuepress/0.png",
+      "date_published": "2026-10-13T00:00:00.000Z",
+      "date_modified": "2026-10-13T08:20:01.000Z",
+      "authors": [
+        {
+          "name": "mothue"
+        }
+      ],
+      "tags": [
+        "Tech"
+      ]
+    },
+    {
+      "title": "テンプレート",
+      "url": "https://virtual-ict-lab.github.io/posts/mothue/my-template.html",
+      "id": "https://virtual-ict-lab.github.io/posts/mothue/my-template.html",
+      "summary": "テンプレート ここから書き始める．",
+      "content_html": "\n<p>ここから書き始める．</p>\n",
+      "date_published": "2026-10-13T00:00:00.000Z",
+      "date_modified": "2026-10-13T08:20:01.000Z",
+      "authors": [
+        {
+          "name": "ここに著者名"
+        }
+      ],
+      "tags": [
+        "テンプレート"
+      ]
+    },
+    {
       "title": "テンプレート",
       "url": "https://virtual-ict-lab.github.io/posts/welcome.html",
       "id": "https://virtual-ict-lab.github.io/posts/welcome.html",
