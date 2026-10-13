@@ -1,0 +1,4 @@
+User-agent:*
+Disallow:
+
+Sitemap: https://virtual-ict-lab.github.io/sitemap.xml

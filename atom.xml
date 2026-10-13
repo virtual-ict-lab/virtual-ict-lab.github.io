@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="https://virtual-ict-lab.github.io/atom.xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja-JP">
+  <id>https://virtual-ict-lab.github.io/</id>
+  <title>Virtual ICT Lab</title>
+  <subtitle>ICTの学びと実践を共有するブログ</subtitle>
+  <updated>2026-10-13T07:28:07.393Z</updated>
+  <generator>@vuepress/plugin-feed</generator>
+  <link rel="self" href="https://virtual-ict-lab.github.io/atom.xml"/>
+  <link rel="alternate" href="https://virtual-ict-lab.github.io/"/>
+  <category term="テンプレート"/>
+  <contributor>
+    <name>Virtual ICT Lab</name>
+  </contributor>
+  <entry>
+    <title type="text">テンプレート</title>
+    <id>https://virtual-ict-lab.github.io/posts/welcome.html</id>
+    <link href="https://virtual-ict-lab.github.io/posts/welcome.html"/>
+    <updated>2026-10-13T07:27:08.000Z</updated>
+    <summary type="html"><![CDATA[<!--
+category:
+  - お知らせ
+tag:
+  - はじめに
+-->
+<h1>テンプレート</h1>
+<p>これは，記事を書く際のテンプレートです．</p>
+]]></summary>
+    <content type="html"><![CDATA[<!--
+category:
+  - お知らせ
+tag:
+  - はじめに
+-->
+<h1>テンプレート</h1>
+<p>これは，記事を書く際のテンプレートです．</p>
+<!-- more -->
+<h2>目次</h2>
+
+<h2>基本の Markdown</h2>
+<p><strong>太字</strong>、<em>斜体</em>、<s>取り消し線</s>、<code>インラインコード</code></p>
+<ul>
+<li>箇条書き
+<ul>
+<li>ネスト</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>番号付きリスト</li>
+<li>番号付きリスト</li>
+</ol>
+<blockquote>
+<p>引用</p>
+</blockquote>
+]]></content>
+    <author>
+      <name>Virtual ICT Lab</name>
+    </author>
+    <category term="テンプレート"/>
+    <contributor>
+      <name>Virtual ICT Lab</name>
+    </contributor>
+    <published>2026-10-13T00:00:00.000Z</published>
+    <rights>Copyright by Virtual ICT Lab</rights>
+  </entry>
+</feed>

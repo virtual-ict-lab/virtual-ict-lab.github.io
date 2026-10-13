@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="https://virtual-ict-lab.github.io/rss.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <atom:link href="https://virtual-ict-lab.github.io/rss.xml" rel="self" type="application/rss+xml"/>
+    <title>Virtual ICT Lab</title>
+    <link>https://virtual-ict-lab.github.io/</link>
+    <description>ICTの学びと実践を共有するブログ</description>
+    <language>ja-JP</language>
+    <pubDate>Tue, 13 Oct 2026 07:28:07 GMT</pubDate>
+    <lastBuildDate>Tue, 13 Oct 2026 07:28:07 GMT</lastBuildDate>
+    <generator>@vuepress/plugin-feed</generator>
+    <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>テンプレート</category>
+    <item>
+      <title>テンプレート</title>
+      <link>https://virtual-ict-lab.github.io/posts/welcome.html</link>
+      <guid>https://virtual-ict-lab.github.io/posts/welcome.html</guid>
+      <source url="https://virtual-ict-lab.github.io/rss.xml">テンプレート</source>
+      <description>テンプレート これは，記事を書く際のテンプレートです． 目次 基本の Markdown 太字、斜体、、インラインコード 箇条書き ネスト 番号付きリスト 番号付きリスト 引用 画像の代替テキスト リンク 外部リンク Hint コンテナ カードっぽいやつ\ ヒント ヒント 警告 警告 危険 危険な警告 情報 情報 重要 重要なメッセージ ノート ノート ...</description>
+      <category>テンプレート</category>
+      <pubDate>Tue, 13 Oct 2026 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<!--
+category:
+  - お知らせ
+tag:
+  - はじめに
+-->
+<h1>テンプレート</h1>
+<p>これは，記事を書く際のテンプレートです．</p>
+<!-- more -->
+<h2>目次</h2>
+
+<h2>基本の Markdown</h2>
+<p><strong>太字</strong>、<em>斜体</em>、<s>取り消し線</s>、<code>インラインコード</code></p>
+<ul>
+<li>箇条書き
+<ul>
+<li>ネスト</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>番号付きリスト</li>
+<li>番号付きリスト</li>
+</ol>
+<blockquote>
+<p>引用</p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="https://virtual-ict-lab.github.io/icons/icon-512.png" type="image/png"/>
+    </item>
+  </channel>
+</rss>
