@@ -1,0 +1,85 @@
+# Working in this repository
+
+## Project and entry points
+
+This is a VuePress 2 static documentation/blog site using Vue 3, the Vite bundler, the default VuePress theme, and `@vuepress/plugin-blog`. There is no separate application server in the project sources. The homepage and posts currently contain VuePress starter/sample content; the package name is `virtual-ict-lab`, but the configured site title remains `VuePress`.
+
+Read only the entry points relevant to the change:
+
+- Content or homepage: `docs/README.md`, `docs/get-started.md`, and `docs/posts/*.md`.
+- Site navigation, blog metadata, filtering, sorting, and generated pages: `docs/.vuepress/config.js`.
+- Layout registration: `docs/.vuepress/client.js`.
+- Blog views: `docs/.vuepress/layouts/{Article,Category,Tag,Timeline}.vue`.
+- Shared article cards, metadata display, and excerpts: `docs/.vuepress/components/ArticleList.vue`.
+- Build and dependency scripts: `package.json` and `package-lock.json`.
+- Deployment: `.github/workflows/deploy-docs.yml`.
+
+No pre-existing agent instructions, Cursor rules, or Copilot instructions were found during discovery.
+
+## Commands and dependency management
+
+Run commands from the repository root. CI uses **Node.js 22** and npm; use that runtime when reproducing deployment behavior.
+
+| Command | Purpose |
+| --- | --- |
+| `npm ci` | Install dependencies from the npm lockfile, as CI does. |
+| `npm run docs:dev` | Start the VuePress development server for `docs`. |
+| `npm run docs:clean-dev` | Start development with `--clean-cache`; use when investigating stale generated state. |
+| `npm run docs:build` | Build the production static site. |
+| `NODE_OPTIONS=--max_old_space_size=8192 npm run docs:build` | Build with the heap limit used by deployment CI. |
+| `npm run docs:update-package` | Run `npx vp-update`, the configured VuePress package updater; this is a dependency-maintenance operation, not a validation command. |
+
+There are no test, lint, typecheck, or preview scripts in `package.json`, and no dedicated test suite was found. The production build is the existing automated validation path; do not assume `npm test` or `npm run lint` exists.
+
+Versions are not uniformly pinned: `vuepress` and `@vuepress/bundler-vite` are exactly `2.0.0-rc.31`, while the blog plugin and default theme use `^2.0.0-rc.137`. VuePress `2.0.0-rc.31` requires Node.js `>=22.18.0`. Check the lockfile and compatibility when changing dependencies rather than assuming all VuePress packages use the same release number.
+
+### Dependency compatibility
+
+The original VuePress/bundler pins at `2.0.0-rc.20` caused a production build failure: the theme's back-to-top plugin imported `useFrontmatter`, which that version of `vuepress/client` did not export. The theme/blog packages require VuePress `2.0.0-rc.31`; aligning the core and bundler to that version resolved the failure. The production build subsequently rendered 34 pages successfully on local Node.js `v26.10.0`. Avoid restoring the older pins independently of the theme and plugin versions.
+
+`.gitignore` excludes installed dependencies, VuePress cache/temp/build directories, macOS metadata, and `.env` files from source publication.
+
+## Architecture and data flow
+
+1. VuePress reads Markdown under `docs`, renders it into page components, and generates static HTML. The site runs as an SPA after initial load.
+2. `config.js` selects blog candidates exclusively when `filePathRelative` starts with `posts/`. A Markdown page elsewhere in `docs` is not automatically a blog article.
+3. The blog plugin extracts each article's `title`, `author`, `date`, `category`, `tag`, and `excerpt` into its `info` object. It generates category/tag pages and article/timeline collections.
+4. `client.js` registers the layout names used by the plugin. These string names must match the registered keys: `Article`, `Category`, `Tag`, and `Timeline`.
+5. Layouts obtain generated data through `useBlogType('article' | 'timeline')` or `useBlogCategory('category' | 'tag')`. Each wraps the default theme's `Layout.vue` and replaces its `#page` slot, retaining the theme shell.
+6. All four views feed `ArticleList.vue` arrays of `{ info, path }` entries. Cards navigate with `$router.push(path)`. Category/tag layouts obtain links, counts, and current items from the plugin map instead of maintaining separate lists.
+
+The navbar links to `/article/`, `/category/`, `/tag/`, and `/timeline/`; these are generated blog pages, not Markdown files to create manually. Homepage actions also link to `/get-started.html`. Keep navigation, plugin keys, and layout registrations consistent when changing routes or adding a view.
+
+## Frontmatter contracts and subtle behavior
+
+- Use YAML arrays for `category` and `tag`, even for a single value. The shared renderer calls `.join(', ')`; strings would not satisfy that contract. Missing values become empty arrays in `getInfo`.
+- Existing dated posts use unquoted YAML dates such as `date: 2020-01-01`. Timeline eligibility checks `page.frontmatter.date instanceof Date`, not merely whether a date is present or parseable. Preserve this representation and verify timeline inclusion when changing date handling; a string date can behave differently from a YAML date object.
+- `archive: true` excludes a post only from the `article` collection. The category/tag getters and timeline filter do not exclude archived posts. Archiving does not remove the page or universally hide it.
+- Article sorting places truthy `sticky` values ahead of non-sticky posts, with higher values first. When both sticky values are equal, the comparator returns zero without applying date ordering. A value of zero is treated as non-sticky.
+- Non-sticky article sorting is newest first for dated posts. The explicit missing-date branches put an undated post before a dated post; do not assume undated entries come last.
+- Timeline sorting is newest first and does not use sticky priority.
+- An `excerpt` string in frontmatter overrides automatic generation. `excerpt: false` disables generation, and homepage frontmatter (`home: true`) is also excluded from automatic excerpts. Otherwise the renderer uses the plugin's generated `data.excerpt`.
+- `docs/posts/sticky2.md` demonstrates the `<!-- more -->` excerpt separator.
+- Excerpts render as HTML with `v-html`, not escaped text. Do not introduce untrusted raw HTML into excerpt metadata without addressing that rendering boundary.
+- Blog hot reload is enabled in `config.js`; the clean-cache development script is available if generated state becomes stale.
+
+## Component and styling conventions
+
+Existing JavaScript uses ESM imports, single-quoted strings, two-space indentation, and no semicolons. Vue components use JavaScript `<script setup>` and PascalCase filenames. Follow these patterns in nearby code rather than adding a new tooling/style layer.
+
+Custom layouts extend the default theme through its page slot rather than replacing the entire application shell. Category and tag views are parallel implementations; check both when changing their shared interaction patterns.
+
+Styles use `<style lang="scss">` without `scoped`, import the theme's `styles/mixins` with `@use`, and use `mixins.content-wrapper` plus theme CSS variables such as `--navbar-height` and `--vp-c-accent-bg`. Class selectors are therefore global. Maintain compatibility with theme variables and consider cross-layout effects when changing selectors. Date labels use `toLocaleDateString()`, so their visible formatting depends on the runtime locale.
+
+## Validation and deployment
+
+For content, configuration, or component changes, run the production build. For changes affecting blog behavior, also inspect the affected views using the development server:
+
+- Article list: sticky ordering, dates, archive exclusion, card navigation, and excerpts.
+- Category/tag pages: generated links, counts, active links, and current article lists.
+- Timeline: YAML date inclusion, newest-first order, and archived-post behavior.
+- Layout/style changes: default-theme navigation and the narrow-screen rules present in the components.
+
+The existing Markdown posts provide examples of dated articles, archived posts, sticky priorities, categories/tags, and excerpt boundaries; they are content examples, not automated tests.
+
+The workflow runs on pushes and pull requests targeting `main`, and supports manual dispatch. Pull requests only validate the build; deployment is restricted to non-pull-request runs on `main`. The workflow installs with `npm ci`, builds with an 8192 MB Node heap limit, creates `docs/.vuepress/dist/.nojekyll`, and publishes `docs/.vuepress/dist` to `gh-pages` through `JamesIves/github-pages-deploy-action@v4`. There is no npm deploy script. The generated `dist` directory is the deployment artifact, not the source location for edits. The current site config does not set a custom `base`; check routing and deployment assumptions before moving the site beneath a URL subpath.
