@@ -25,30 +25,13 @@
     },
     {
       "title": "テンプレート",
-      "url": "https://virtual-ict-lab.github.io/posts/mothue/my-template.html",
-      "id": "https://virtual-ict-lab.github.io/posts/mothue/my-template.html",
-      "summary": "テンプレート ここから書き始める．",
-      "content_html": "\n<p>ここから書き始める．</p>\n",
-      "date_published": "2026-10-13T00:00:00.000Z",
-      "date_modified": "2026-10-13T08:20:01.000Z",
-      "authors": [
-        {
-          "name": "ここに著者名"
-        }
-      ],
-      "tags": [
-        "テンプレート"
-      ]
-    },
-    {
-      "title": "テンプレート",
-      "url": "https://virtual-ict-lab.github.io/posts/welcome.html",
-      "id": "https://virtual-ict-lab.github.io/posts/welcome.html",
+      "url": "https://virtual-ict-lab.github.io/posts/template.html",
+      "id": "https://virtual-ict-lab.github.io/posts/template.html",
       "summary": "テンプレート これは，記事を書く際のテンプレートです． 目次 基本の Markdown 太字、斜体、、インラインコード 箇条書き ネスト 番号付きリスト 番号付きリスト 引用 画像の代替テキスト リンク 外部リンク Hint コンテナ カードっぽいやつ\\ ヒント ヒント 警告 警告 危険 危険な警告 情報 情報 重要 重要なメッセージ ノート ノート ...",
       "content_html": "<!--\ncategory:\n  - お知らせ\ntag:\n  - はじめに\n-->\n<h1>テンプレート</h1>\n<p>これは，記事を書く際のテンプレートです．</p>\n<!-- more -->\n<h2>目次</h2>\n\n<h2>基本の Markdown</h2>\n<p><strong>太字</strong>、<em>斜体</em>、<s>取り消し線</s>、<code>インラインコード</code></p>\n<ul>\n<li>箇条書き\n<ul>\n<li>ネスト</li>\n</ul>\n</li>\n</ul>\n<ol>\n<li>番号付きリスト</li>\n<li>番号付きリスト</li>\n</ol>\n<blockquote>\n<p>引用</p>\n</blockquote>\n",
       "image": "https://virtual-ict-lab.github.io/icons/icon-512.png",
       "date_published": "2026-10-13T00:00:00.000Z",
-      "date_modified": "2026-10-13T07:27:08.000Z",
+      "date_modified": "2026-10-13T09:20:28.000Z",
       "authors": [
         {
           "name": "Virtual ICT Lab"

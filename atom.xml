@@ -3,7 +3,7 @@
   <id>https://virtual-ict-lab.github.io/</id>
   <title>Virtual ICT Lab</title>
   <subtitle>ICTの学びと実践を共有するブログ</subtitle>
-  <updated>2026-10-13T08:31:02.912Z</updated>
+  <updated>2026-10-13T09:24:22.284Z</updated>
   <generator>@vuepress/plugin-feed</generator>
   <link rel="self" href="https://virtual-ict-lab.github.io/atom.xml"/>
   <link rel="alternate" href="https://virtual-ict-lab.github.io/"/>
@@ -11,9 +11,6 @@
   <category term="テンプレート"/>
   <contributor>
     <name>mothue</name>
-  </contributor>
-  <contributor>
-    <name>ここに著者名</name>
   </contributor>
   <contributor>
     <name>Virtual ICT Lab</name>
@@ -118,30 +115,9 @@
   </entry>
   <entry>
     <title type="text">テンプレート</title>
-    <id>https://virtual-ict-lab.github.io/posts/mothue/my-template.html</id>
-    <link href="https://virtual-ict-lab.github.io/posts/mothue/my-template.html"/>
-    <updated>2026-10-13T08:20:01.000Z</updated>
-    <summary type="html"><![CDATA[
-<p>ここから書き始める．</p>
-]]></summary>
-    <content type="html"><![CDATA[
-<p>ここから書き始める．</p>
-]]></content>
-    <author>
-      <name>ここに著者名</name>
-    </author>
-    <category term="テンプレート"/>
-    <contributor>
-      <name>ここに著者名</name>
-    </contributor>
-    <published>2026-10-13T00:00:00.000Z</published>
-    <rights>Copyright by ここに著者名</rights>
-  </entry>
-  <entry>
-    <title type="text">テンプレート</title>
-    <id>https://virtual-ict-lab.github.io/posts/welcome.html</id>
-    <link href="https://virtual-ict-lab.github.io/posts/welcome.html"/>
-    <updated>2026-10-13T07:27:08.000Z</updated>
+    <id>https://virtual-ict-lab.github.io/posts/template.html</id>
+    <link href="https://virtual-ict-lab.github.io/posts/template.html"/>
+    <updated>2026-10-13T09:20:28.000Z</updated>
     <summary type="html"><![CDATA[<!--
 category:
   - お知らせ

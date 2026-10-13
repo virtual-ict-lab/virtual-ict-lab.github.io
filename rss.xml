@@ -6,8 +6,8 @@
     <link>https://virtual-ict-lab.github.io/</link>
     <description>ICTの学びと実践を共有するブログ</description>
     <language>ja-JP</language>
-    <pubDate>Tue, 13 Oct 2026 08:31:02 GMT</pubDate>
-    <lastBuildDate>Tue, 13 Oct 2026 08:31:02 GMT</lastBuildDate>
+    <pubDate>Tue, 13 Oct 2026 09:24:22 GMT</pubDate>
+    <lastBuildDate>Tue, 13 Oct 2026 09:24:22 GMT</lastBuildDate>
     <generator>@vuepress/plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>Tech</category>
@@ -93,20 +93,8 @@
     </item>
     <item>
       <title>テンプレート</title>
-      <link>https://virtual-ict-lab.github.io/posts/mothue/my-template.html</link>
-      <guid>https://virtual-ict-lab.github.io/posts/mothue/my-template.html</guid>
-      <source url="https://virtual-ict-lab.github.io/rss.xml">テンプレート</source>
-      <description>テンプレート ここから書き始める．</description>
-      <category>テンプレート</category>
-      <pubDate>Tue, 13 Oct 2026 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[
-<p>ここから書き始める．</p>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>テンプレート</title>
-      <link>https://virtual-ict-lab.github.io/posts/welcome.html</link>
-      <guid>https://virtual-ict-lab.github.io/posts/welcome.html</guid>
+      <link>https://virtual-ict-lab.github.io/posts/template.html</link>
+      <guid>https://virtual-ict-lab.github.io/posts/template.html</guid>
       <source url="https://virtual-ict-lab.github.io/rss.xml">テンプレート</source>
       <description>テンプレート これは，記事を書く際のテンプレートです． 目次 基本の Markdown 太字、斜体、、インラインコード 箇条書き ネスト 番号付きリスト 番号付きリスト 引用 画像の代替テキスト リンク 外部リンク Hint コンテナ カードっぽいやつ\ ヒント ヒント 警告 警告 危険 危険な警告 情報 情報 重要 重要なメッセージ ノート ノート ...</description>
       <category>テンプレート</category>
