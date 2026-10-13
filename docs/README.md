@@ -2,7 +2,7 @@
 home: true
 title: ようこそ
 heroText: vICT (Virtual ICT Lab)
-tagline:  
+tagline:   
 heroImage: icons/icon-512.png
 actions:
   - text: 記事を読む
