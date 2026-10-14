@@ -1,30 +1,47 @@
 ---
 date: 2026-10-13
 author: Virtual ICT Lab
-category:
-  - テンプレート
 tag:
   - テンプレート
 ---
 
 <!--
-category:
-  - お知らせ
 tag:
+  - お知らせ
   - はじめに
 -->
+
 # テンプレート
+
+<PageMeta />
 
 これは，記事を書く際のテンプレートです．
 
 <!-- more -->
 
 ## 目次
+
 [[toc]]
+
+## プロフィールカード
+
+<AuthorProfile
+  name="Virtual ICT Lab"
+  avatar="/icons/icon-192.png"
+  bio="ICTの学びと実践を共有しています。"
+  :links="[
+    { label: 'GitHub', url: 'https://github.com/virtual-ict-lab', icon: 'github' },
+    { label: 'Webサイト', url: 'https://virtual-ict-lab.github.io/' },
+  ]"
+/>
+
+画像・自己紹介・リンクを省略する場合：
+
+<AuthorProfile name="ハンドルネーム" />
 
 ## 基本の Markdown
 
-**太字**、*斜体*、~~取り消し線~~、`インラインコード`
+**太字**、_斜体_、~~取り消し線~~、`インラインコード`
 
 - 箇条書き
   - ネスト
@@ -34,18 +51,26 @@ tag:
 
 > 引用
 
+## 脚注
+
+本文に補足[^note]や出典[^vuepress]を付けられます．同じ脚注をもう一度参照することもできます[^note]．
+
+[^note]: これは補足の脚注です．脚注はページ下部にまとめて表示されます．
+[^vuepress]: [VuePress公式ドキュメント](https://v2.vuepress.vuejs.org/)
+
 ---
 
 | 列A | 列B |
 | --- | --- |
-| 1 | 2 |
-| 3 | 4 |
+| 1   | 2   |
+| 3   | 4   |
 
 ![画像の代替テキスト](/icons/icon-512.png)
 
 ## リンク
 
 <!-- 内部リンクは相対パスの .md 指定を推奨 -->
+
 [同じ階層の記事](./other.md)\
 [親階層の記事](../README.md)\
 [絶対パス](/guide/introduction.md)\
@@ -91,7 +116,7 @@ This is a tip
 隠れている内容
 
 ```ts
-console.log('Hello, VuePress!')
+console.log("Hello, VuePress!");
 ```
 
 :::
@@ -103,6 +128,7 @@ VuePress 2 is out :tada: !
 ## コードブロック
 
 通常：
+
 ```rust
 fn main() {
     println!("Hello, World");
@@ -110,6 +136,7 @@ fn main() {
 ```
 
 タイトル付き：
+
 ```rust title="main.rs"
 fn main() {
     println!("Hello, World");
@@ -117,6 +144,7 @@ fn main() {
 ```
 
 行ハイライト：
+
 ```rust{1,3}
 fn main() {
     println!("Hello, World");
@@ -124,6 +152,7 @@ fn main() {
 ```
 
 行ハイライト（範囲・複数）：
+
 ```rust{1,3-4}
 fn main() {
     let a = 1;
@@ -133,6 +162,7 @@ fn main() {
 ```
 
 行番号強制ON
+
 ```rust:line-numbers
 fn main() {
     println!("Hello, World");
@@ -140,6 +170,7 @@ fn main() {
 ```
 
 行番号強制OFF
+
 ```rust:no-line-numbers
 fn main() {
     println!("Hello, World");
@@ -147,6 +178,7 @@ fn main() {
 ```
 
 組み合わせ
+
 ```rust title="a.rs" {1} :no-line-numbers
 fn main() {
     println!("Hello, World");
@@ -154,11 +186,17 @@ fn main() {
 ```
 
 v-pre（デフォルトで有効なので `{{ }}` はそのまま表示される）：
+
 ```md
 1 + 2 + 3 = {{ 1 + 2 + 3 }}
 ```
 
 v-pre を無効化（Vue に評価させる）：
+
+::: warning
+👇 これ謎に動いていません．たぶんどこかで設定間違えてます．私が
+:::
+
 ```md:no-v-pre
 1 + 2 + 3 = {{ 1 + 2 + 3 }}
 ```
@@ -238,7 +276,9 @@ flowchart LR
 ::: normal-demo クリックして試す
 
 ```html
-<button onclick="this.textContent = '試せました！'">クリックしてください</button>
+<button onclick="this.textContent = '試せました！'">
+  クリックしてください
+</button>
 ```
 
 :::

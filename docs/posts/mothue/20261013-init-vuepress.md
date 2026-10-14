@@ -1,9 +1,8 @@
 ---
 date: 2026-10-13
 author: mothue
-category:
-  - Tech
 tag:
+  - Tech
   - VuePress
   - npm
 ---

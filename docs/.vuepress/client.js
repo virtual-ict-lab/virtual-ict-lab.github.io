@@ -1,12 +1,18 @@
 import { defineClientConfig } from 'vuepress/client'
 import { getSearchClientConfig, setSearchClientConfig } from '@vuepress/plugin-slimsearch/client'
+import AuthorProfile from './components/AuthorProfile.vue'
+import FootnotePreview from './components/FootnotePreview.vue'
+import PageHeaderMeta from './components/PageHeaderMeta.vue'
 import Article from './layouts/Article.vue'
-import Category from './layouts/Category.vue'
+import Document from './layouts/Document.vue'
 import Tag from './layouts/Tag.vue'
 import Timeline from './layouts/Timeline.vue'
 
 export default defineClientConfig({
-  enhance() {
+  enhance({ app }) {
+    app.component('AuthorProfile', AuthorProfile)
+    app.component('PageMeta', PageHeaderMeta)
+
     if (import.meta.env.DEV) {
       const searchConfig = getSearchClientConfig()
       const devWorker = searchConfig.devWorker
@@ -21,9 +27,10 @@ export default defineClientConfig({
   },
   // we provide some blog layouts
   layouts: {
+    Layout: Document,
     Article,
-    Category,
     Tag,
     Timeline,
   },
+  rootComponents: [FootnotePreview],
 })

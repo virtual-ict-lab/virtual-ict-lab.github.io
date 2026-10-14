@@ -9,8 +9,10 @@ Read only the entry points relevant to the change:
 - Content or homepage: `docs/README.md`, `docs/get-started.md`, and `docs/posts/*.md`.
 - Site navigation, blog metadata, filtering, sorting, and generated pages: `docs/.vuepress/config.js`.
 - Layout registration: `docs/.vuepress/client.js`.
-- Blog views: `docs/.vuepress/layouts/{Article,Category,Tag,Timeline}.vue`.
+- Blog views: `docs/.vuepress/layouts/{Article,Tag,Timeline}.vue`. Normal Markdown pages use `Document.vue`, registered as `Layout`, to add `PageHeaderMeta.vue` above the content.
 - Shared article cards, metadata display, and excerpts: `docs/.vuepress/components/ArticleList.vue`.
+- Embeddable profile cards: `docs/.vuepress/components/AuthorProfile.vue`, globally registered in `client.js`.
+- Footnote source previews: `docs/.vuepress/components/FootnotePreview.vue`, registered as a root component in `client.js`.
 - Build and dependency scripts: `package.json` and `package-lock.json`.
 - Deployment: `.github/workflows/deploy-docs.yml`.
 
@@ -43,20 +45,26 @@ The original VuePress/bundler pins at `2.0.0-rc.20` caused a production build fa
 
 1. VuePress reads Markdown under `docs`, renders it into page components, and generates static HTML. The site runs as an SPA after initial load.
 2. `config.js` selects blog candidates exclusively when `filePathRelative` starts with `posts/`. A Markdown page elsewhere in `docs` is not automatically a blog article.
-3. The blog plugin extracts each article's `title`, `author`, `date`, `category`, `tag`, and `excerpt` into its `info` object. It generates category/tag pages and article/timeline collections.
-4. `client.js` registers the layout names used by the plugin. These string names must match the registered keys: `Article`, `Category`, `Tag`, and `Timeline`.
-5. Layouts obtain generated data through `useBlogType('article' | 'timeline')` or `useBlogCategory('category' | 'tag')`. Each wraps the default theme's `Layout.vue` and replaces its `#page` slot, retaining the theme shell.
-6. All four views feed `ArticleList.vue` arrays of `{ info, path }` entries. Cards navigate with `$router.push(path)`. Category/tag layouts obtain links, counts, and current items from the plugin map instead of maintaining separate lists.
+3. The blog plugin extracts each article's `title`, `author`, `date`, `tag`, and `excerpt` into its `info` object. It generates tag pages and article/timeline collections. Article classification uses tags only; the plugin's `category` option still configures the tag grouping.
+4. `client.js` registers the layout names used by the plugin. These string names must match the registered keys: `Article`, `Tag`, and `Timeline`.
+5. Layouts obtain generated data through `useBlogType('article' | 'timeline')` or `useBlogCategory('tag')`. Each wraps the default theme's `Layout.vue` and replaces its `#page` slot, retaining the theme shell.
+6. All three views feed `ArticleList.vue` arrays of `{ info, path }` entries. Cards navigate with `$router.push(path)`. The tag layout obtains links, counts, and current items from the plugin map instead of maintaining a separate list.
 
-The navbar links to `/article/`, `/category/`, `/tag/`, and `/timeline/`; these are generated blog pages, not Markdown files to create manually. Homepage actions also link to `/get-started.html`. Keep navigation, plugin keys, and layout registrations consistent when changing routes or adding a view.
+The navbar links to `/article/`, `/tag/`, and `/timeline/`; these are generated blog pages, not Markdown files to create manually. Homepage actions also link to `/get-started.html`. Keep navigation, plugin keys, and layout registrations consistent when changing routes or adding a view.
 
 ## Plugins and color themes
 
-`config.js` enables SlimSearch, Shiki, Markdown Chart, Markdown Math (KaTeX), Markdown Enhance (code demos), Reading Time, PhotoSwipe, Feed, PWA, and Redirect as standalone plugins. Copy Code, Markdown Hint (`hint`), Markdown Tab (`tab`), NProgress, Sitemap, SEO, and Git are configured through `defaultTheme({ themePlugins })`; do not register them a second time. PrismJS is disabled to avoid competing with Shiki, and Medium Zoom is disabled in favor of PhotoSwipe. SEO, Sitemap, and Feed use the published hostname `https://virtual-ict-lab.github.io/`.
+`config.js` enables SlimSearch, Shiki, Markdown Ext (footnotes), Markdown Chart, Markdown Math (KaTeX), Markdown Enhance (code demos), Reading Time, PhotoSwipe, Feed, PWA, and Redirect as standalone plugins. Copy Code, Markdown Hint (`hint`), Markdown Tab (`tab`), NProgress, Sitemap, SEO, and Git are configured through `defaultTheme({ themePlugins })`; do not register them a second time. PrismJS is disabled to avoid competing with Shiki, and Medium Zoom is disabled in favor of PhotoSwipe. SEO, Sitemap, and Feed use the published hostname `https://virtual-ict-lab.github.io/`.
 
 Shiki uses `catppuccin-latte` for light mode and `catppuccin-mocha` for dark mode. Its language list is explicit; add languages there when needed. The default theme UI uses matching CSS variable overrides in `docs/.vuepress/styles/index.scss`, loaded automatically by VuePress. Keep both UI palettes and syntax themes aligned.
 
 Markdown Chart enables Chart.js, ECharts, and Mermaid, with their rendering dependencies installed directly. Script execution inside chart definitions remains disabled by default. Markdown tabs and code tabs are enabled. Links Check is explicitly disabled at the user's request, so illustrative links in the Markdown template do not block builds. Git metadata requires repository history; CI checks out full history.
+
+Markdown Ext enables footnotes (`footnote: true`) with automatic CJK emphasis changes disabled (`cjkFriendly: false`). Authors use `[^name]` and `[^name]: content`; numbered notes collect at the bottom of each page with return links. Footnote examples are in the template and contribution guide.
+
+`FootnotePreview.vue` shows the original paragraph on hover or keyboard focus of a footnote return link. It uses plain text, preserves direct return links, and closes on Escape, scroll, resize, or page navigation. Default-theme footer timestamps and contributors are disabled; `PageHeaderMeta.vue` displays Git's last-updated time and Reading Time data above normal Markdown content instead. Git contributor collection is disabled, while timestamps remain enabled.
+
+`pageMeta: false` disables the automatic metadata block. The local `local-page-meta` plugin also disables it when rendered Markdown contains a live `<PageMeta />` or `<page-meta>` tag; code examples and comments are excluded. It exposes this detection as `page.data.hasPageMeta` for `Document.vue`. The globally registered `<PageMeta />` renders the same data anywhere in Markdown, independently of `pageMeta`. Its Boolean props `showUpdated` and `showReadingTime` can hide each field. The template demonstrates manual placement under its title without requiring `pageMeta: false`.
 
 Vite SSR must keep `@vuepress/search-helper` in `ssr.noExternal`: otherwise SlimSearch causes static rendering to fail with an unknown `.css` extension. Successful builds currently emit upstream warnings about `worker/dev.js` and large chunks; these do not prevent search index, sitemap, or page generation.
 
@@ -66,9 +74,9 @@ PWA icons are source assets under `docs/.vuepress/public/icons/`. The production
 
 ## Frontmatter contracts and subtle behavior
 
-- Use YAML arrays for `category` and `tag`, even for a single value. The shared renderer calls `.join(', ')`; strings would not satisfy that contract. Missing values become empty arrays in `getInfo`.
+- Use YAML arrays for `tag`, even for a single value. The shared renderer calls `.join(', ')`; strings would not satisfy that contract. Missing values become empty arrays in `getInfo`.
 - Existing dated posts use unquoted YAML dates such as `date: 2020-01-01`. Timeline eligibility checks `page.frontmatter.date instanceof Date`, not merely whether a date is present or parseable. Preserve this representation and verify timeline inclusion when changing date handling; a string date can behave differently from a YAML date object.
-- `archive: true` excludes a post only from the `article` collection. The category/tag getters and timeline filter do not exclude archived posts. Archiving does not remove the page or universally hide it.
+- `archive: true` excludes a post only from the `article` collection. The tag getter and timeline filter do not exclude archived posts. Archiving does not remove the page or universally hide it.
 - Article sorting places truthy `sticky` values ahead of non-sticky posts, with higher values first. When both sticky values are equal, the comparator returns zero without applying date ordering. A value of zero is treated as non-sticky.
 - Non-sticky article sorting is newest first for dated posts. The explicit missing-date branches put an undated post before a dated post; do not assume undated entries come last.
 - Timeline sorting is newest first and does not use sticky priority.
@@ -81,7 +89,9 @@ PWA icons are source assets under `docs/.vuepress/public/icons/`. The production
 
 Existing JavaScript uses ESM imports, single-quoted strings, two-space indentation, and no semicolons. Vue components use JavaScript `<script setup>` and PascalCase filenames. Follow these patterns in nearby code rather than adding a new tooling/style layer.
 
-Custom layouts extend the default theme through its page slot rather than replacing the entire application shell. Category and tag views are parallel implementations; check both when changing their shared interaction patterns.
+Custom layouts extend the default theme through its page slot rather than replacing the entire application shell. Article, tag, and timeline views share `ArticleList.vue`; check each when changing their shared interaction patterns.
+
+`AuthorProfile` can be placed anywhere in Markdown. Its props are required `name` and optional `avatar`, `bio`, and `links`. Each link uses `{ label, url, icon? }`; `github` and `x` select Tabler social icons. Profile cards are independent of frontmatter `author` metadata. Examples are in `docs/posts/template.md` and `docs/contribute-guide.md`.
 
 Styles use `<style lang="scss">` without `scoped`, import the theme's `styles/mixins` with `@use`, and use `mixins.content-wrapper` plus theme CSS variables such as `--navbar-height` and `--vp-c-accent-bg`. Class selectors are therefore global. Maintain compatibility with theme variables and consider cross-layout effects when changing selectors. Date labels use `toLocaleDateString()`, so their visible formatting depends on the runtime locale.
 
@@ -90,7 +100,7 @@ Styles use `<style lang="scss">` without `scoped`, import the theme's `styles/mi
 For content, configuration, or component changes, run the production build. For changes affecting blog behavior, also inspect the affected views using the development server:
 
 - Article list: sticky ordering, dates, archive exclusion, card navigation, and excerpts.
-- Category/tag pages: generated links, counts, active links, and current article lists.
+- Tag pages: generated links, counts, active links, and current article lists.
 - Timeline: YAML date inclusion, newest-first order, and archived-post behavior.
 - Layout/style changes: default-theme navigation and the narrow-screen rules present in the components.
 
