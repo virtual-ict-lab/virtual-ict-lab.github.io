@@ -8,6 +8,8 @@ tag:
 
 # 記事を書く
 
+<PageMeta />
+
 ::: tip お知らせ
 GitHub Organizationに入っていない人はDiscordでmentionしてください．
 :::
@@ -17,6 +19,12 @@ GitHub Organizationに入っていない人はDiscordでmentionしてくださ�
 :::
 
 [[toc]]
+
+## 必読
+
+マークダウンの構文集：[markdown-guide.md](./posts/markdown-guide.md)
+
+投稿のテンプレート：[posts/template.md](./posts/template.md)
 
 ## 手順
 
