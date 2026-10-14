@@ -1,6 +1,7 @@
 ---
 date: 2026-10-13
 author: mothue
+excerpt: VuePressを構築して公開するまでの手順を爆速公開！
 tag:
   - Tech
   - VuePress
@@ -8,6 +9,8 @@ tag:
 ---
 
 # VuePress 自分流爆速構築ガイド(2026年版)
+
+<PageMeta />
 
 ::: info
 この記事は執筆中です．今後随時更新されます．
@@ -90,3 +93,13 @@ Settings -> Pages -> Branchから，"Branch"の項目を開きます．
 ## まとめ
 
 GitHub Pagesは神！なので全人類GitHub Pagesでオリジナルのブログを生やしましょう．
+
+<AuthorProfile
+  name="mothue"
+  avatar="/mothue/mozui-icon-a.png"
+  bio="BunとRustのオタク"
+  :links="[
+    { label: 'GitHub', url: 'https://github.com/mothue', icon: 'github' },
+    { label: 'X', url: 'https://x.com/m0thue', icon: 'x' },
+  ]"
+/>
