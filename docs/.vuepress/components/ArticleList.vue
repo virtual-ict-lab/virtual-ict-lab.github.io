@@ -1,4 +1,6 @@
 <script setup>
+import { IconCalendar, IconClock, IconTags, IconUser } from '@tabler/icons-vue'
+
 defineProps({
   /** Article items */
   items: {
@@ -30,15 +32,38 @@ defineProps({
       <hr />
 
       <div class="article-info">
-        <span v-if="info.author" class="author">執筆者: {{ info.author }}</span>
+        <span v-if="info.author" class="article-info-item author" title="執筆者">
+          <IconUser :size="18" :stroke="1.75" aria-hidden="true" />
+          <span class="article-info-value">
+            <span class="article-info-label">執筆者: </span>{{ info.author }}
+          </span>
+        </span>
 
-        <span v-if="info.date && !isTimeline" class="date"
-          >公開日: {{ new Date(info.date).toLocaleDateString('ja-JP') }}</span
+        <span
+          v-if="info.date && !isTimeline"
+          class="article-info-item date"
+          title="公開日"
         >
+          <IconCalendar :size="18" :stroke="1.75" aria-hidden="true" />
+          <span class="article-info-value">
+            <span class="article-info-label">公開日: </span>
+            {{ new Date(info.date).toLocaleDateString('ja-JP') }}
+          </span>
+        </span>
 
-        <span v-if="info.tag?.length" class="tag">タグ: {{ info.tag.join(', ') }}</span>
-        <span v-if="info.readingTime" class="reading-time">
-          読了目安: {{ Math.max(1, Math.ceil(info.readingTime.minutes)) }}分
+        <span v-if="info.tag?.length" class="article-info-item tag" title="タグ">
+          <IconTags :size="18" :stroke="1.75" aria-hidden="true" />
+          <span class="article-info-value">
+            <span class="article-info-label">タグ: </span>{{ info.tag.join(', ') }}
+          </span>
+        </span>
+
+        <span v-if="info.readingTime" class="article-info-item reading-time" title="読了目安">
+          <IconClock :size="18" :stroke="1.75" aria-hidden="true" />
+          <span class="article-info-value">
+            <span class="article-info-label">読了目安: </span>
+            {{ Math.max(1, Math.ceil(info.readingTime.minutes)) }}分
+          </span>
         </span>
       </div>
 
@@ -110,12 +135,34 @@ defineProps({
 
   .article-info {
     display: flex;
-    flex-wrap: wrap;
-    flex-shrink: 0;
+    flex-direction: column;
+    gap: 0.25rem;
+    line-height: 1.6;
 
-    > span {
-      margin-inline-end: 0.5em;
-      line-height: 1.8;
+    .article-info-item {
+      display: grid;
+      grid-template-columns: 18px minmax(0, 1fr);
+      gap: 0.5rem;
+      align-items: start;
+    }
+
+    svg {
+      margin-top: 0.25em;
+    }
+
+    .article-info-value {
+      overflow-wrap: anywhere;
+    }
+
+    .article-info-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
     }
   }
 

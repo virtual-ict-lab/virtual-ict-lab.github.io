@@ -1,5 +1,6 @@
 import { blogPlugin } from '@vuepress/plugin-blog'
 import { feedPlugin } from '@vuepress/plugin-feed'
+import { markdownExtPlugin } from '@vuepress/plugin-markdown-ext'
 import { markdownMathPlugin } from '@vuepress/plugin-markdown-math'
 import { photoSwipePlugin } from '@vuepress/plugin-photo-swipe'
 import { pwaPlugin } from '@vuepress/plugin-pwa'
@@ -22,6 +23,8 @@ export default defineUserConfig({
 
   theme: defaultTheme({
     hostname: 'https://virtual-ict-lab.github.io/',
+    lastUpdated: false,
+    contributors: false,
     themePlugins: {
       prismjs: false,
       copyCode: { showInMobile: true },
@@ -32,7 +35,7 @@ export default defineUserConfig({
       hint: true,
       nprogress: true,
       linksCheck: false,
-      git: { createdTime: true, updatedTime: true, contributors: true },
+      git: { createdTime: true, updatedTime: true, contributors: false },
     },
     logo: '/icons/icon.svg',
     lastUpdatedText: '最終更新',
@@ -70,6 +73,14 @@ export default defineUserConfig({
   }),
 
   plugins: [
+    {
+      name: 'local-page-meta',
+      extendsPage(page) {
+        const content = page.contentRendered.replace(/<!--[\s\S]*?-->/g, '')
+        page.data.hasPageMeta = /<(?:PageMeta|page-meta)(?=[\s/>])/.test(content)
+      },
+    },
+    markdownExtPlugin({ footnote: true, cjkFriendly: false }),
     markdownMathPlugin({ type: 'katex' }),
     mdEnhancePlugin({ demo: true }),
     readingTimePlugin(),
