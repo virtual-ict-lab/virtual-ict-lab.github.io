@@ -96,7 +96,7 @@ GitHub Pagesは神！なので全人類GitHub Pagesでオリジナルのブロ�
 
 <AuthorProfile
   name="mothue"
-  avatar="/mothue/mozui-icon-a.png"
+  avatar="/mothue/avatar.png"
   bio="BunとRustのオタク"
   :links="[
     { label: 'GitHub', url: 'https://github.com/mothue', icon: 'github' },
