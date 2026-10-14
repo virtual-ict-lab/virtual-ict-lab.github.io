@@ -56,7 +56,7 @@ tag:
 
 ここの内容は全て理解できなくても大丈夫です。
 
-原論文
+原論文(2018年)
 
 **The Tsetlin Machine -- A Game Theoretic Bandit Driven Approach to Optimal Pattern Recognition with Propositional Logic** (英)
 ツェトリンマシン -- 命題論理による最適パターン認識への、ゲーム理論とバンディット問題に基づくアプローチ。(日)
@@ -69,8 +69,6 @@ tag:
 
 ::: tabs
 
-@tab 原文(英語)
-Although simple individually, artificial neurons provide state-of-the-art performance when interconnected in deep networks. Arguably, the Tsetlin Automaton is an even simpler and more versatile learning mechanism, capable of solving the multi-armed bandit problem. Merely by means of a single integer as memory, it learns the optimal action in stochastic environments through increment and decrement operations. In this paper, we introduce the Tsetlin Machine, which solves complex pattern recognition problems with propositional formulas, composed by a collective of Tsetlin Automata. To eliminate the longstanding problem of vanishing signal-to-noise ratio, the Tsetlin Machine orchestrates the automata using a novel game. Further, both inputs, patterns, and outputs are expressed as bits, while recognition and learning rely on bit manipulation, simplifying computation. Our theoretical analysis establishes that the Nash equilibria of the game align with the propositional formulas that provide optimal pattern recognition accuracy. This translates to learning without local optima, only global ones. In five benchmarks, the Tsetlin Machine provides competitive accuracy compared with SVMs, Decision Trees, Random Forests, Naive Bayes Classifier, Logistic Regression, and Neural Networks. We further demonstrate how the propositional formulas facilitate interpretation. In conclusion, we believe the combination of high accuracy, interpretability, and computational simplicity makes the Tsetlin Machine a promising tool for a wide range of domains. 
 
 @tab 訳文(日本語 by PLAMO)
 個々の人工ニューロンは単純であるが、深層ネットワークで相互接続されることで最先端の性能を発揮する。
@@ -89,10 +87,29 @@ Although simple individually, artificial neurons provide state-of-the-art perfor
 
 さらに、命題論理式がいかにして解釈を容易にするかを実証する。結論として、高い精度、解釈可能性、および計算の単純さの組み合わせにより、ツェトリン・マシンは幅広い領域において有望なツールになると考えている。
 
+@tab 原文(英語)
+Although simple individually, artificial neurons provide state-of-the-art performance when interconnected in deep networks.
+
+Arguably, the Tsetlin Automaton is an even simpler and more versatile learning mechanism, capable of solving the multi-armed bandit problem. 
+
+Merely by means of a single integer as memory, it learns the optimal action in stochastic environments through increment and decrement operations. 
+
+In this paper, we introduce the Tsetlin Machine, which solves complex pattern recognition problems with propositional formulas, composed by a collective of Tsetlin Automata. To eliminate the longstanding problem of vanishing signal-to-noise ratio, the Tsetlin Machine orchestrates the automata using a novel game.
+
+Further, both inputs, patterns, and outputs are expressed as bits, while recognition and learning rely on bit manipulation, simplifying computation.
+
+Our theoretical analysis establishes that the Nash equilibria of the game align with the propositional formulas that provide optimal pattern recognition accuracy. 
+
+This translates to learning without local optima, only global ones. In five benchmarks, the Tsetlin Machine provides competitive accuracy compared with SVMs, Decision Trees, Random Forests, Naive Bayes Classifier, Logistic Regression, and Neural Networks. 
+
+We further demonstrate how the propositional formulas facilitate interpretation. 
+
+In conclusion, we believe the combination of high accuracy, interpretability, and computational simplicity makes the Tsetlin Machine a promising tool for a wide range of domains. 
+
 :::
 
 
-### 用語解説：
+### 用語解説
 
 #### 人工ニューロン、深層ネットワーク
 現代の深層学習アルゴリズムの基本構造です。
@@ -122,7 +139,7 @@ Although simple individually, artificial neurons provide state-of-the-art perfor
 #### 多腕バンディット問題
 当たる確率や報酬がバラバラな複数のスロットマシンがあります。選択できる行動は「どのスロットを引くか」です。そんな環境で何回もスロットを引いて試しながら、報酬の最大化を目指します。
 
-[Vol.31.No.5(2016/9)多腕バンディット問題 | 人工知能学会 (The Japanese Society for Artificial Intelligence)][https://www.ai-gakkai.or.jp/resource/my-bookmark/my-bookmark_vol31-no5/]
+[Vol.31.No.5(2016/9)多腕バンディット問題 | 人工知能学会 (The Japanese Society for Artificial Intelligence)](https://www.ai-gakkai.or.jp/resource/my-bookmark/my-bookmark_vol31-no5/)
 
 
 #### 局所最適解、大域的最適解
@@ -134,7 +151,7 @@ Although simple individually, artificial neurons provide state-of-the-art perfor
 
 #### SVM、決定木、ランダムフォレスト、ナイーブベイズ分類器、ロジスティック回帰、およびニューラルネットワーク
 SVM、決定木、ランダムフォレストは大きなif文を作る学習アルゴリズム、
-実用的とされている学習アルゴリズムの名前の一覧だと思ってくささい。
+実用的とされている学習アルゴリズムの一覧だと思ってくささい。
 
 
 ## Tsetlin Machineが生まれた経緯
@@ -145,28 +162,34 @@ SVM、決定木、ランダムフォレストは大きなif文を作る学習ア
 
 特にLLMが一部タスクで人間を超えるようになったのはスケーリング則が大いに関連していて、そのあたりの話も非常に面白いのですが、メリットばかりではありません。
 
-よく言われるデメリットは「学習/推論時の計算コスト」と「解釈可能性」です。
+よく言われるデメリットは **「学習/推論時の計算コスト」** と **「解釈可能性」** です。
 
 学習/推論時の計算コストは馬鹿にならなくて、1回の学習に100万円以上かかるなんてのはザラです。
 
 (BERTとかでそのレベルなので、今のフロンティアモデルなんてのはどれだけ計算資源を食いつくしているのか想像が付きません...)
 
+
 また、解釈可能性も一部の分野で凄く重要となります。
 
+それは **「医療」** です。
+
+医療というのは最優先で最先端技術による効率化が必要であるにも関らず、ブラックボックスなAIをシステムに組み込むことは絶対にできません。(技術者倫理)
+
+そのため、解釈可能性の高いモデルはAIの社会実装において必要なのです。
 
 
-
-...そう、「医療分野」です。
-
-医療というのは最優先で最先端技術による効率化が必要であるにも関らず、解釈可能性が無いブラックボックスのAIに命を委ねるようなことは絶対にできません。(技術者倫理があれば)
-
-##  
+その二大問題が解消できる夢のようなアルゴリズム、それがTsetlin Machineです!
 
 
+...というと言いすぎもしれませんが、実際にかなり解決に貢献しています。
+
+## 具体的なアルゴリズム 
+
+
+![clauseの図](/boson/20261014-tsetlin-machine/clause.png)
 
 
 参考文献
-
 
 
 VuePressを構築してGitHub Pagesにデプロイしたので，手順をまとめておきます．VuePressを建てたい方の参考になると幸いです．
