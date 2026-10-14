@@ -6,19 +6,16 @@
     <link>https://virtual-ict-lab.github.io/</link>
     <description>ICTの学びと実践を共有するブログ</description>
     <language>ja-JP</language>
-    <pubDate>Tue, 13 Oct 2026 11:35:32 GMT</pubDate>
-    <lastBuildDate>Tue, 13 Oct 2026 11:35:32 GMT</lastBuildDate>
+    <pubDate>Wed, 14 Oct 2026 09:54:15 GMT</pubDate>
+    <lastBuildDate>Wed, 14 Oct 2026 09:54:15 GMT</lastBuildDate>
     <generator>@vuepress/plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
-    <category>Tech</category>
-    <category>テンプレート</category>
     <item>
       <title>VuePress 自分流爆速構築ガイド(2026年版)</title>
       <link>https://virtual-ict-lab.github.io/posts/mothue/20261013-init-vuepress.html</link>
       <guid>https://virtual-ict-lab.github.io/posts/mothue/20261013-init-vuepress.html</guid>
       <source url="https://virtual-ict-lab.github.io/rss.xml">VuePress 自分流爆速構築ガイド(2026年版)</source>
       <description>VuePress 自分流爆速構築ガイド(2026年版) 関連情報 この記事は執筆中です．今後随時更新されます． VuePressを構築してGitHub Pagesにデプロイしたので，手順をまとめておきます．VuePressを建てたい方の参考になると幸いです． 環境 node v26.10.0 npm 11.19.1 導入する npmで構築する場合です．...</description>
-      <category>Tech</category>
       <pubDate>Tue, 13 Oct 2026 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[
 <div class="hint-container info">
@@ -96,13 +93,11 @@
       <link>https://virtual-ict-lab.github.io/posts/template.html</link>
       <guid>https://virtual-ict-lab.github.io/posts/template.html</guid>
       <source url="https://virtual-ict-lab.github.io/rss.xml">テンプレート</source>
-      <description>テンプレート これは，記事を書く際のテンプレートです． 目次 基本の Markdown 太字、斜体、、インラインコード 箇条書き ネスト 番号付きリスト 番号付きリスト 引用 画像の代替テキスト リンク 外部リンク Hint コンテナ カードっぽいやつ\ ヒント ヒント 警告 警告 危険 危険な警告 情報 情報 重要 重要なメッセージ ノート ノート ...</description>
-      <category>テンプレート</category>
+      <description>テンプレート これは，記事を書く際のテンプレートです． 目次 プロフィールカード 画像・自己紹介・リンクを省略する場合： 基本の Markdown 太字、斜体、、インラインコード 箇条書き ネスト 番号付きリスト 番号付きリスト 引用 脚注 本文に補足[1]や出典[2]を付けられます．同じ脚注をもう一度参照することもできます[1:1]． 画像の代替テキ...</description>
       <pubDate>Tue, 13 Oct 2026 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<!--
-category:
-  - お知らせ
 tag:
+  - お知らせ
   - はじめに
 -->
 <h1>テンプレート</h1>
@@ -110,6 +105,9 @@ tag:
 <!-- more -->
 <h2>目次</h2>
 
+<h2>プロフィールカード</h2>
+
+<p>画像・自己紹介・リンクを省略する場合：</p>
 <h2>基本の Markdown</h2>
 <p><strong>太字</strong>、<em>斜体</em>、<s>取り消し線</s>、<code>インラインコード</code></p>
 <ul>
@@ -126,6 +124,17 @@ tag:
 <blockquote>
 <p>引用</p>
 </blockquote>
+<h2>脚注</h2>
+<p>本文に補足<sup class="footnote-ref"><a href="#footnote1">[1]</a><a class="footnote-anchor" id="footnote-ref1"></a></sup>や出典<sup class="footnote-ref"><a href="#footnote2">[2]</a><a class="footnote-anchor" id="footnote-ref2"></a></sup>を付けられます．同じ脚注をもう一度参照することもできます<sup class="footnote-ref"><a href="#footnote1">[1:1]</a><a class="footnote-anchor" id="footnote-ref1:1"></a></sup>．</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="footnote1" class="footnote-item"><p>これは補足の脚注です．脚注はページ下部にまとめて表示されます． <a href="#footnote-ref1" class="footnote-backref">↩︎</a> <a href="#footnote-ref1:1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="footnote2" class="footnote-item"><p><a href="https://v2.vuepress.vuejs.org/" target="_blank" rel="noopener noreferrer">VuePress公式ドキュメント</a> <a href="#footnote-ref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
 ]]></content:encoded>
       <enclosure url="https://virtual-ict-lab.github.io/icons/icon-512.png" type="image/png"/>
     </item>
