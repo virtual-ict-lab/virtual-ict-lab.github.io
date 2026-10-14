@@ -1,16 +1,13 @@
 ---
 date: 2026-10-13
 author: Virtual ICT Lab
-category:
-  - テンプレート
 tag:
   - テンプレート
 ---
 
 <!--
-category:
-  - お知らせ
 tag:
+  - お知らせ
   - はじめに
 -->
 # テンプレート

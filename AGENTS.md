@@ -9,7 +9,7 @@ Read only the entry points relevant to the change:
 - Content or homepage: `docs/README.md`, `docs/get-started.md`, and `docs/posts/*.md`.
 - Site navigation, blog metadata, filtering, sorting, and generated pages: `docs/.vuepress/config.js`.
 - Layout registration: `docs/.vuepress/client.js`.
-- Blog views: `docs/.vuepress/layouts/{Article,Category,Tag,Timeline}.vue`.
+- Blog views: `docs/.vuepress/layouts/{Article,Tag,Timeline}.vue`.
 - Shared article cards, metadata display, and excerpts: `docs/.vuepress/components/ArticleList.vue`.
 - Build and dependency scripts: `package.json` and `package-lock.json`.
 - Deployment: `.github/workflows/deploy-docs.yml`.
@@ -43,12 +43,12 @@ The original VuePress/bundler pins at `2.0.0-rc.20` caused a production build fa
 
 1. VuePress reads Markdown under `docs`, renders it into page components, and generates static HTML. The site runs as an SPA after initial load.
 2. `config.js` selects blog candidates exclusively when `filePathRelative` starts with `posts/`. A Markdown page elsewhere in `docs` is not automatically a blog article.
-3. The blog plugin extracts each article's `title`, `author`, `date`, `category`, `tag`, and `excerpt` into its `info` object. It generates category/tag pages and article/timeline collections.
-4. `client.js` registers the layout names used by the plugin. These string names must match the registered keys: `Article`, `Category`, `Tag`, and `Timeline`.
-5. Layouts obtain generated data through `useBlogType('article' | 'timeline')` or `useBlogCategory('category' | 'tag')`. Each wraps the default theme's `Layout.vue` and replaces its `#page` slot, retaining the theme shell.
-6. All four views feed `ArticleList.vue` arrays of `{ info, path }` entries. Cards navigate with `$router.push(path)`. Category/tag layouts obtain links, counts, and current items from the plugin map instead of maintaining separate lists.
+3. The blog plugin extracts each article's `title`, `author`, `date`, `tag`, and `excerpt` into its `info` object. It generates tag pages and article/timeline collections. Article classification uses tags only; the plugin's `category` option still configures the tag grouping.
+4. `client.js` registers the layout names used by the plugin. These string names must match the registered keys: `Article`, `Tag`, and `Timeline`.
+5. Layouts obtain generated data through `useBlogType('article' | 'timeline')` or `useBlogCategory('tag')`. Each wraps the default theme's `Layout.vue` and replaces its `#page` slot, retaining the theme shell.
+6. All three views feed `ArticleList.vue` arrays of `{ info, path }` entries. Cards navigate with `$router.push(path)`. The tag layout obtains links, counts, and current items from the plugin map instead of maintaining a separate list.
 
-The navbar links to `/article/`, `/category/`, `/tag/`, and `/timeline/`; these are generated blog pages, not Markdown files to create manually. Homepage actions also link to `/get-started.html`. Keep navigation, plugin keys, and layout registrations consistent when changing routes or adding a view.
+The navbar links to `/article/`, `/tag/`, and `/timeline/`; these are generated blog pages, not Markdown files to create manually. Homepage actions also link to `/get-started.html`. Keep navigation, plugin keys, and layout registrations consistent when changing routes or adding a view.
 
 ## Plugins and color themes
 
@@ -66,9 +66,9 @@ PWA icons are source assets under `docs/.vuepress/public/icons/`. The production
 
 ## Frontmatter contracts and subtle behavior
 
-- Use YAML arrays for `category` and `tag`, even for a single value. The shared renderer calls `.join(', ')`; strings would not satisfy that contract. Missing values become empty arrays in `getInfo`.
+- Use YAML arrays for `tag`, even for a single value. The shared renderer calls `.join(', ')`; strings would not satisfy that contract. Missing values become empty arrays in `getInfo`.
 - Existing dated posts use unquoted YAML dates such as `date: 2020-01-01`. Timeline eligibility checks `page.frontmatter.date instanceof Date`, not merely whether a date is present or parseable. Preserve this representation and verify timeline inclusion when changing date handling; a string date can behave differently from a YAML date object.
-- `archive: true` excludes a post only from the `article` collection. The category/tag getters and timeline filter do not exclude archived posts. Archiving does not remove the page or universally hide it.
+- `archive: true` excludes a post only from the `article` collection. The tag getter and timeline filter do not exclude archived posts. Archiving does not remove the page or universally hide it.
 - Article sorting places truthy `sticky` values ahead of non-sticky posts, with higher values first. When both sticky values are equal, the comparator returns zero without applying date ordering. A value of zero is treated as non-sticky.
 - Non-sticky article sorting is newest first for dated posts. The explicit missing-date branches put an undated post before a dated post; do not assume undated entries come last.
 - Timeline sorting is newest first and does not use sticky priority.
@@ -81,7 +81,7 @@ PWA icons are source assets under `docs/.vuepress/public/icons/`. The production
 
 Existing JavaScript uses ESM imports, single-quoted strings, two-space indentation, and no semicolons. Vue components use JavaScript `<script setup>` and PascalCase filenames. Follow these patterns in nearby code rather than adding a new tooling/style layer.
 
-Custom layouts extend the default theme through its page slot rather than replacing the entire application shell. Category and tag views are parallel implementations; check both when changing their shared interaction patterns.
+Custom layouts extend the default theme through its page slot rather than replacing the entire application shell. Article, tag, and timeline views share `ArticleList.vue`; check each when changing their shared interaction patterns.
 
 Styles use `<style lang="scss">` without `scoped`, import the theme's `styles/mixins` with `@use`, and use `mixins.content-wrapper` plus theme CSS variables such as `--navbar-height` and `--vp-c-accent-bg`. Class selectors are therefore global. Maintain compatibility with theme variables and consider cross-layout effects when changing selectors. Date labels use `toLocaleDateString()`, so their visible formatting depends on the runtime locale.
 
@@ -90,7 +90,7 @@ Styles use `<style lang="scss">` without `scoped`, import the theme's `styles/mi
 For content, configuration, or component changes, run the production build. For changes affecting blog behavior, also inspect the affected views using the development server:
 
 - Article list: sticky ordering, dates, archive exclusion, card navigation, and excerpts.
-- Category/tag pages: generated links, counts, active links, and current article lists.
+- Tag pages: generated links, counts, active links, and current article lists.
 - Timeline: YAML date inclusion, newest-first order, and archived-post behavior.
 - Layout/style changes: default-theme navigation and the narrow-screen rules present in the components.
 

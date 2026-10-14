@@ -36,10 +36,6 @@ defineProps({
           >公開日: {{ new Date(info.date).toLocaleDateString('ja-JP') }}</span
         >
 
-        <span v-if="info.category?.length" class="category"
-          >カテゴリー: {{ info.category.join(', ') }}</span
-        >
-
         <span v-if="info.tag?.length" class="tag">タグ: {{ info.tag.join(', ') }}</span>
         <span v-if="info.readingTime" class="reading-time">
           読了目安: {{ Math.max(1, Math.ceil(info.readingTime.minutes)) }}分

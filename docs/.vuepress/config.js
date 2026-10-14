@@ -59,10 +59,6 @@ export default defineUserConfig({
         link: '/article/',
       },
       {
-        text: 'カテゴリー',
-        link: '/category/',
-      },
-      {
         text: 'タグ',
         link: '/tag/',
       },
@@ -126,7 +122,6 @@ export default defineUserConfig({
         author: frontmatter.author || '',
         date: frontmatter.date || null,
         readingTime: data.readingTime || null,
-        category: frontmatter.category || [],
         tag: frontmatter.tag || [],
         excerpt:
           // Support manually set excerpt through frontmatter
@@ -142,20 +137,6 @@ export default defineUserConfig({
         typeof frontmatter.excerpt !== 'string',
 
       category: [
-        {
-          key: 'category',
-          getter: (page) => page.frontmatter.category || [],
-          layout: 'Category',
-          itemLayout: 'Category',
-          frontmatter: () => ({
-            title: 'カテゴリー',
-            sidebar: false,
-          }),
-          itemFrontmatter: (name) => ({
-            title: `カテゴリー: ${name}`,
-            sidebar: false,
-          }),
-        },
         {
           key: 'tag',
           getter: (page) => page.frontmatter.tag || [],
