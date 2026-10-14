@@ -41,6 +41,8 @@ The original VuePress/bundler pins at `2.0.0-rc.20` caused a production build fa
 
 `.gitignore` excludes installed dependencies, VuePress cache/temp/build directories, macOS metadata, and `.env` files from source publication.
 
+`docs:build` uses `.temp-build` and `.cache-build`, separate from development's `.temp` and `.cache`, to prevent generated blog index/store mismatches when building during development. Never run two development servers against the same temp/cache directories. A second verification server must use separate `--temp` and `--cache` paths.
+
 ## Architecture and data flow
 
 1. VuePress reads Markdown under `docs`, renders it into page components, and generates static HTML. The site runs as an SPA after initial load.
