@@ -3,7 +3,7 @@
   <id>https://virtual-ict-lab.github.io/</id>
   <title>Virtual ICT Lab</title>
   <subtitle>ICTの学びと実践を共有するブログ</subtitle>
-  <updated>2026-10-14T09:54:15.443Z</updated>
+  <updated>2026-10-14T11:47:04.612Z</updated>
   <generator>@vuepress/plugin-feed</generator>
   <link rel="self" href="https://virtual-ict-lab.github.io/atom.xml"/>
   <link rel="alternate" href="https://virtual-ict-lab.github.io/"/>
@@ -13,11 +13,14 @@
   <contributor>
     <name>Virtual ICT Lab</name>
   </contributor>
+  <contributor>
+    <name>Virtual-ICT-Lab</name>
+  </contributor>
   <entry>
     <title type="text">VuePress 自分流爆速構築ガイド(2026年版)</title>
     <id>https://virtual-ict-lab.github.io/posts/mothue/20261013-init-vuepress.html</id>
     <link href="https://virtual-ict-lab.github.io/posts/mothue/20261013-init-vuepress.html"/>
-    <updated>2026-10-14T07:48:49.000Z</updated>
+    <updated>2026-10-14T11:45:24.000Z</updated>
     <summary type="html"><![CDATA[
 <div class="hint-container info">
 <p class="hint-container-title">関連情報</p>
@@ -100,6 +103,7 @@
 <p>ここの&quot;Branch&quot;が，デフォルトでは<code>main</code>になっていると思うので，ここを<code>gh-pages</code>にします．これで公開ができるようになるので，保存してから数分待つと，設定したドメイン（特にいじっていないなら<code>your-github-id.github.io</code>になっているはず）でアクセスができます．</p>
 <h2>まとめ</h2>
 <p>GitHub Pagesは神！なので全人類GitHub Pagesでオリジナルのブログを生やしましょう．</p>
+
 ]]></content>
     <author>
       <name>mothue</name>
@@ -111,25 +115,25 @@
     <rights>Copyright by mothue</rights>
   </entry>
   <entry>
-    <title type="text">テンプレート</title>
-    <id>https://virtual-ict-lab.github.io/posts/template.html</id>
-    <link href="https://virtual-ict-lab.github.io/posts/template.html"/>
-    <updated>2026-10-14T09:51:53.000Z</updated>
+    <title type="text">Markdown装飾一覧</title>
+    <id>https://virtual-ict-lab.github.io/posts/markdown-guide.html</id>
+    <link href="https://virtual-ict-lab.github.io/posts/markdown-guide.html"/>
+    <updated>2026-10-14T11:45:03.000Z</updated>
     <summary type="html"><![CDATA[<!--
 tag:
   - お知らせ
   - はじめに
 -->
-<h1>テンプレート</h1>
-<p>これは，記事を書く際のテンプレートです．</p>
+<h1>Markdown装飾一覧</h1>
+<p>これは，記事を書く際に使えるmarkdown装飾一覧です．</p>
 ]]></summary>
     <content type="html"><![CDATA[<!--
 tag:
   - お知らせ
   - はじめに
 -->
-<h1>テンプレート</h1>
-<p>これは，記事を書く際のテンプレートです．</p>
+<h1>Markdown装飾一覧</h1>
+<p>これは，記事を書く際に使えるmarkdown装飾一覧です．</p>
 <!-- more -->
 <h2>目次</h2>
 
@@ -172,5 +176,56 @@ tag:
     </contributor>
     <published>2026-10-13T00:00:00.000Z</published>
     <rights>Copyright by Virtual ICT Lab</rights>
+  </entry>
+  <entry>
+    <title type="text">すぐ使える記事テンプレート</title>
+    <id>https://virtual-ict-lab.github.io/posts/template.html</id>
+    <link href="https://virtual-ict-lab.github.io/posts/template.html"/>
+    <updated>2026-10-14T11:45:03.000Z</updated>
+    <summary type="html"><![CDATA[
+<!-- 最終更新日時と読了目安。好きな場所へ移動・削除できます -->
+<p>これは，コピペですぐ使える記事テンプレートです．好きな項目は追加したり，不要な項目は削除したりして，自由にお使いください．</p>
+<p>なお，VuePressに対応してる構文のガイドは，<a href="/posts/markdown-guide.html" target="_blank">markdown-guide.md</a>にあります．そちらもご覧ください．</p>
+<!-- 本文の見出しから目次を自動生成します -->
+<!-- 左にもあるのでいらないなら消してもいいかも -->
+
+<h2>環境</h2>]]></summary>
+    <content type="html"><![CDATA[
+<!-- 最終更新日時と読了目安。好きな場所へ移動・削除できます -->
+<p>これは，コピペですぐ使える記事テンプレートです．好きな項目は追加したり，不要な項目は削除したりして，自由にお使いください．</p>
+<p>なお，VuePressに対応してる構文のガイドは，<a href="/posts/markdown-guide.html" target="_blank">markdown-guide.md</a>にあります．そちらもご覧ください．</p>
+<!-- 本文の見出しから目次を自動生成します -->
+<!-- 左にもあるのでいらないなら消してもいいかも -->
+
+<h2>環境</h2>
+<ul>
+<li>node v26.10.0</li>
+</ul>
+<h2>本文</h2>
+<p>あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。</p>
+<p>またそのなかでいっしょになったたくさんのひとたち、ファゼーロとロザーロ、羊飼のミーロや、顔の赤いこどもたち、地主のテーモ、山猫博士のボーガント・デストゥパーゴなど、いまこの暗い巨きな石の建物のなかで考えていると、みんなむかし風のなつかしい青い幻燈のように思われます。では、わたくしはいつかの小さなみだしをつけながら、しずかにあの年のイーハトーヴォの五月から十月までを書きつけましょう。</p>
+<h2>おわりに</h2>
+<p>別に段落構成は自分の思うままにしていただいてOKです．</p>
+<!--
+プロフィール：
+- name：ハンドルネーム
+- avatar：画像のパスです．正方形の画像がおすすめ
+- bio：短い自己紹介
+- links：リンクボタン。不要なものは削除してください
+
+name以外は省略できます。
+画像は docs/.vuepress/public/your_handle/avatar.png などに置いて，それを指定してください
+GitHub・X以外のリンクは icon を省略すると名前付きボタンになります
+-->
+
+]]></content>
+    <author>
+      <name>Virtual-ICT-Lab</name>
+    </author>
+    <contributor>
+      <name>Virtual-ICT-Lab</name>
+    </contributor>
+    <published>2026-10-14T00:00:00.000Z</published>
+    <rights>Copyright by Virtual-ICT-Lab</rights>
   </entry>
 </feed>
