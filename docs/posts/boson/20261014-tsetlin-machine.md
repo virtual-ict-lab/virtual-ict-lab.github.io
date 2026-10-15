@@ -59,6 +59,7 @@ tag:
 原論文(2018年)
 
 **The Tsetlin Machine -- A Game Theoretic Bandit Driven Approach to Optimal Pattern Recognition with Propositional Logic** (英)
+
 ツェトリンマシン -- 命題論理による最適パターン認識への、ゲーム理論とバンディット問題に基づくアプローチ。(日)
 
 [https://arxiv.org/abs/1804.01508]
@@ -183,88 +184,97 @@ SVM、決定木、ランダムフォレストは大きなif文を作る学習ア
 
 ...というと言いすぎもしれませんが、実際にかなり解決に貢献しています。
 
-## 具体的なアルゴリズム 
+
+## Tsetlin Automaton
+
+Tsetlin Machineの元ネタとしてTsetlin Automatonという学習オートマトンがあります。
+
+::: details オートマトンについて
+
+オートマトンというのは内部状態を持っていて、状態遷移によって状態が変化する様子をモデル化したものです。
+
+Wikipediaに掲載されていた図が分かりやすかったので、それを参考に
+
+![扉の開閉に関するAutomaton](https://upload.wikimedia.org/wikipedia/commons/d/d9/FSM_example_w_comments.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original)
+
+状態遷移先は状態によって違って、行動/条件によっても違います
+
+これは○が2つありますが、オートマトンが2つあるという図ではなく、オートマトンが持てる **状態が2つある** という意味です。
+
+複雑な概念ではないので(とは言っても奥は深い)、納得できなければ調べてみてください!
+
+:::
+
+
+Tsetlin Automatonはとても簡単な構造で、オートマトンと言うからには状態があるのですが、状態には **1つの正の整数** しか持ちません。
+
+持てる状態の幅としてNというパラメーターを用意します。
+
+Nは基本なんでも良いです。ただ、人間が設定する必要があり、性能を左右するパラメーターです。(ハイパーパラメーター)
+
+Tsetlin Automatonが持てる状態は有限で、**1~2Nの正の整数** です。
+
+
+![TAの図1](/boson/20261014-tsetlin-machine/ta1.png)
+
+この正の整数がN以下なら「含めない」、N+1は以上なら「含める」ということにします。
+
+具体的に何を含めるのかは後ほど説明しますが、とりあえず飲み込んでください。
+
+![TAの図2](/boson/20261014-tsetlin-machine/ta2.png)
+
+そして、「含める」「含めない」を選択したことにより、「報酬」か「罰」を受けることになります。
+
+
+![TAの図3](/boson/20261014-tsetlin-machine/ta3.png)
+
+報酬を受けると「含めない」状態なら更に「含めない」方向に、「含める」状態なら「含める」方向に状態を遷移させます。
+
+罰を受けると「含めない」状態なら「含める」方向に、「含める」状態なら「含めない」方向に状態を遷移させます。
+
+状態→行動→報酬の流れを聞いて強化学習の枠組みととても良く似てることに気づくかもしれません。
+
+実際に学習オートマトンは強化学習の先祖の一つで、強化学習の勉強で一番初めに習う「多腕バンディット問題」の解法と似ています。
+
+## Tsetlin Machine のアルゴリズム
+
+
+機械学習の勉強において重要な考え方として想像していただきたいのは、最終的に作りたいのは **「入力したら出力が得られる関数」** であることです。
+
+計算機を用いている以上、作れるのは **関数** なのです。
+
+その関数の内部処理がとても複雑で、入力が数百万次元になっても、関数なのです。
+
+画像から写っている動物の名前を出力する関数、音声から話している内容を文字に起こす関数、質問から応答を言葉で返す関数、ゲームの次の行動を決める関数...全て入力と出力が存在します。
+
+![]
+
+
+### Tsetlin Machineのデータ前処理
+
+Tsetlin Machineではこの入力と出力は全て真偽値(boolean)になっています。
+
+もちろん深層学習では殆ど浮動小数点型(float)ですが、Tsetlin Machineは論理式を扱う関係上、真偽値にする必要があります。
+
+具体的には、MNISTという手書き数字の白黒画像データセットの場合、それぞれのピクセルに0.0~1.0の明るさがあります。
+
+そのままではTsetlin Machineでは使えないので、閾値を0.25として、それ以上ならTRUE、未満ならFALSEのように前処理を行います。
+
+そして、MNISTでは0~10のどの数字が書かれているかを予測する必要があるのですが、「0か、0でないか」「1か、1でないか」という風にすべての数字に対して学習します。
+
+
+### Clause
+
+Tsetlin Machineを構成する構造として、Clause(節)があります。
+
+個人的に「節」という訳はあまり好きではないので、Clauseと呼ばせてください。
+
+Clauseの全体像はこんなかんじです。
 
 
 ![clauseの図](/boson/20261014-tsetlin-machine/clause.png)
 
 
+
+
 参考文献
-
-
-VuePressを構築してGitHub Pagesにデプロイしたので，手順をまとめておきます．VuePressを建てたい方の参考になると幸いです．
-
-
-## 環境
-
-- node v26.10.0
-- npm 11.19.1
-
-## 導入する
-
-`npm`で構築する場合です．`my-blog`の名前は好きな名前にできます．この名前で新規ディレクトリが作成されます．
-
-GitHub Pagesで公開する場合，ここは`your-github-id.github.io`にするといいでしょう．
-
-```bash title="Bash" :no-line-numbers
-npm init vuepress my-blog
-```
-
-実行すると，何件か質問があります．迷いそうなところだけ挙げておきます：
-
-- `Which bundler do you want to use?` -> `vite`がおすすめです．
-- `What type of project do you want to create?` -> ここでは`blog`を選びます．
-- `Your project name` -> 私はディレクトリ名とおなじにしています．良いのか悪いのかはわかりません
-- `Do you need a GitHub workflow to deploy docs on GitHub pages?` -> `Y` を選びます．
-
-完了すると，依存関係などのインストールが始まるので，ちょっと待ちます．
-
-`Successful Generated!`が出たら完璧です．
-
-`Would you like to preview template now?`は．`Y`でテンプレートサーバーが動きますが，ここでは`n`でスキップしましょう．どうせあとで開きます．
-
-## 設定と起動のテスト
-
-先ほど作ったディレクトリに移動してください．
-ちなみに，もし`vulnerabilities`の警告が出た場合，`npm audit fix --force`をしておきましょう．
-
-```bash title="Bash" :no-line-numbers
-cd my-blog
-npm audit fix --force
-```
-
-起動するかのテストをします．何も触っていなければ起動するはずです！
-
-開発用のホットリロード対応なviteサーバーが生えてきます：
-```bash title="Bash" :no-line-numbers
-npm run docs:dev
-```
-
-純粋にビルドが通るだけの確認はこちら：
-```bash title="Bash" :no-line-numbers
-npm run docs:build
-```
-
-## 早速デプロイ
-
-いよいよデプロイです．まず，このリポジトリをGitHubにアップロードしてください．すると，`workflows`の中のCI/CDが走って，自動でビルドされます．
-
-変なことをしていない限り，問題は起こらない（はず）です．問題が起きたらClaudeとかに聞いてください．
-
-CIが通ると，こんな感じに緑のチェックマークが出てきます．
-
-![CI/CDが成功した様子．最新のコミットメッセージの右に緑色のチェックマークが表示されている．](/mothue/20261013-init-vuepress/0.png)
-
-ビルド通らなかった場合，赤色の❌表示になるので，クリックするとログが見れます．
-
-次に，GitHubの設定を開きます：
-
-Settings -> Pages -> Branchから，"Branch"の項目を開きます．
-
-![GitHub Pagesの公開するブランチの様子．ブランチの選択部分が`gh-pages`に選択されている様子．](/mothue/20261013-init-vuepress/1.png)
-
-ここの"Branch"が，デフォルトでは`main`になっていると思うので，ここを`gh-pages`にします．これで公開ができるようになるので，保存してから数分待つと，設定したドメイン（特にいじっていないなら`your-github-id.github.io`になっているはず）でアクセスができます．
-
-## まとめ
-
-GitHub Pagesは神！なので全人類GitHub Pagesでオリジナルのブログを生やしましょう．
