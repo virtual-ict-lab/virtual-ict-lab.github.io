@@ -294,11 +294,28 @@ Tsetlin Automaton: N=50
 
 全ての入力を論理積(AND)で繋ぎ、その出力にClauseに割り当てられた符号(+/-)を付けることでClauseの出力が完成します。
 
+ここまで説明してようやく全体像を説明することができます。
 
-
+### Tsetlin Machineの全体像
 
 ![tsetlin machineの図](/boson/20261014-tsetlin-machine/tsetlin.png)
+
 Clauseの数: 4
+
+このようにClauseを+/-それぞれ半数ずつ用意します。
+
+今回はClauseの数を4つに設定します。
+
+入力と入力の否定を用意して、それぞれを各Clauseに接続します。
+
+そして、Clauseからは±(0または1)が出てくるはずで、その総和を取ります。
+
+ここで注意したいのは0/1はClause内で途中まで真偽値として扱っていましたが、符号を付けた後からは数字の0と1として扱います。
+
+### Tsetlin Machineの学習
+
+
+
 
 
 参考文献
