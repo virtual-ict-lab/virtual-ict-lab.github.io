@@ -195,7 +195,7 @@ Tsetlin Machineの元ネタとしてTsetlin Automatonという学習オートマ
 
 Wikipediaに掲載されていた図が分かりやすかったので、それを参考に
 
-![扉の開閉に関するAutomaton](https://upload.wikimedia.org/wikipedia/commons/d/d9/FSM_example_w_comments.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original)
+![扉の開閉に関するAutomaton](https://upload.wikimedia.org/wikipedia/commons/d/d9/FSM_example_w_comments.png)
 
 状態遷移先は状態によって違って、行動/条件によっても違います
 
@@ -244,7 +244,7 @@ Tsetlin Automatonが持てる状態は有限で、**1~2Nの正の整数** です
 
 ![TAの図3](/boson/20261014-tsetlin-machine/ta3.png)
 
-## Tsetlin Machine のアルゴリズム
+## Tsetlin Machine の推論アルゴリズム
 
 
 機械学習の勉強において重要な考え方として想像していただきたいのは、最終的に作りたいのは **「入力したら出力が得られる関数」** であることです。
@@ -296,7 +296,7 @@ Tsetlin Automaton: N=50
 
 ここまで説明してようやく全体像を説明することができます。
 
-### Tsetlin Machineの全体像
+### Tsetlin Machineの推論の全体像
 
 ![tsetlin machineの図](/boson/20261014-tsetlin-machine/tsetlin.png)
 
@@ -312,10 +312,374 @@ Clauseの数: 4
 
 ここで注意したいのは0/1はClause内で途中まで真偽値として扱っていましたが、符号を付けた後からは数字の0と1として扱います。
 
-### Tsetlin Machineの学習
+総和が取れたら、0以上ならTRUE、0未満ならFALSEとして、最終出力が決定されます。
+
+## Tsetlin Machineの学習アルゴリズム
+
+### 注意点
+
+Tsetlin Automatonで報酬と罰の概念を解説したのですが、実はTsetlin Machineではこの **報酬と罰の要素は使いません** 。
+
+というのももっと単純な **「含める方向に進める(include)」** と **「含めない方向に進める(exclude)」** で扱います。
+
+これがTsetlin Machineが初見で理解できない原因だと考えています。
+
+![tsetlin machineの図](/boson/20261014-tsetlin-machine/ta4.png)
+
+ただ、1から2Nの正の整数のみを状態に持つオートマトンであり、N以下は「含めない」、N以上は含めるという要素は変わりません。
+
+### Feedback
+
+説明の簡略化のためにClauseに対してFeedbackという操作を定義します。
+また、sという人間が調整するパラメーターを用意します。これは、確率操作を行うためのパラメーターです。s=3.9が推奨されています。
+
+#### Type I Feedback
+
+Feedbackはオートマトンごとに操作を行うのですが、Type Iには2つ操作があります。
+オートマトンが担当する入力が1でClauseの出力も1なら、\[1\]を取り、それ以外なら\[2\]を取ります。
+
+\[1\]  $\frac{s-1}{s}$の確率で「含める方向に進める」
+
+\[2\]  $\frac{1}{s}$の確率で「含めない方向に進める」
+
+#### Type II feedback
+
+Type IIはシンプルです。
+
+Clauseの出力が1で、担当している入力が0のオートマトンを「含める方向に進める」
+
+### 学習
+
+推論時に出した総和を元に、Feedbackを適用するかどうかを確率的に決めます。
+
+総和が正しい方向に大きいほど、Feedbackを適用する確率が下ります。
+
+これは、精度が高いほど修正する必要が少ないためです。
+
+初期状態では五分五分くらいです。
+
+具体的なFeedbackの適用確率の計算式はこのようになっています。(Tは人間が設定するパラメーター)
+
+$clause_{i}$は$i$番目のClauseの出力を表しています。
+
+$$
+v = \mathrm{clip}(\sum_{k=1}^{clauseの数}clause_{k}, -T, T)
+$$
+$$
+p = \begin{cases}
+  (T-v)/2T & (正解が1)\\
+  (T+v)/2T & (正解が0)
+\end{cases}
+$$
+
+実際に正解が1の時のpを考えると、v=t(予測が1で確信している)のときに確率0.0、v=-t(予測が0で確信している)のときに確率1.0であり、望み通りの式であることがわかります。
+
+そして、Feedbackが適用されることが確定したら、このようにFeedbackを割り当てます。
+
+|  | 符号が+ | 符号が- |
+| --- | --- | --- |
+| 正解が1 | Type I | Type II |
+| 正解が0 | Type II | Type I |
+
+
+これを繰り返すことで学習が完了します!!!!!!
+
+## 実装
+
+うすうす勘づいている方も居られるかもしれませんが、実装厨のお前らには余裕で実装できるような実装です。
+
+XORの学習の実装を載せておきます。
+
+XORの学習とは、2入力からXORと同じ出力を行うものです。
+```rust
+    let input_data = [[false, false], [true, false], [false, true], [true, true]];
+    let label_data = [false, true, true, false];
+```
+データは簡単だけど学習するのが難しい規則性を持っています。(非線形問題)
+
+ぜひ実装してみてください!
+
+["線形分離可能"のイメージをつかむ #機械学習入門 - Qiita](https://qiita.com/forusufia/items/53de18be0e07b258fc76)
+
+
+::: details RustでのXOR実装
+```toml Cargo.toml
+[package]
+name = "tsetlin-rs"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+rand = "0.10.3"
+```
+
+```rust main.rs
+
+use rand::rngs::ThreadRng;
+use rand::{Rng, RngExt};
+
+struct TsetlinAutomaton {
+    state: i32, // 1~2*n_states
+    n_states: i32,
+}
+
+struct Clause {
+    automata: Vec<TsetlinAutomaton>,
+    polarity: bool,
+}
+
+struct TsetlinMachineConfig {
+    pub n_clauses: usize,  // Clauseの数
+    pub n_features: usize, // 入力の特徴数
+    pub n_states: i32,     // ClauseのN
+    pub s: f64,            // 特殊化パラメーター
+    pub threshold_t: i32,
+}
+
+impl TsetlinMachineConfig {
+    fn init(&self, rng: &mut impl Rng) -> TsetlinMachine {
+        let clauses: Vec<Clause> = (0..self.n_clauses)
+            .map(|i| {
+                Clause::new(
+                    ((i + 1) as f32 / self.n_clauses as f32) > 0.5,
+                    self.n_features,
+                    self.n_states,
+                )
+            })
+            .collect();
+        TsetlinMachine {
+            clauses,
+            n_clauses: self.n_clauses,
+            threshold_t: self.threshold_t,
+            s: self.s,
+        }
+    }
+}
+
+struct TsetlinMachine {
+    clauses: Vec<Clause>,
+    n_clauses: usize,
+    threshold_t: i32,
+    s: f64,
+}
+
+impl TsetlinAutomaton {
+    fn include_action(&mut self) {
+        self.state = (self.state + 1).min(2 * self.n_states);
+    }
+    fn exclude_action(&mut self) {
+        self.state = (self.state - 1).max(1);
+    }
+}
+
+impl Clause {
+    fn new(polarity: bool, n_features: usize, n_states: i32) -> Self {
+        let automata: Vec<TsetlinAutomaton> = (0..2 * n_features)
+            .map(|_i| TsetlinAutomaton {
+                state: n_states,
+                n_states,
+            })
+            .collect();
+
+        Self { automata, polarity }
+    }
+
+    fn str_params(&self) -> String {
+        let mut list: Vec<String> = Vec::new();
+        for (idx, automaton) in self.automata.iter().enumerate() {
+            if automaton.state > automaton.n_states {
+                if idx < self.automata.len() / 2 {
+                    list.push(idx.to_string());
+                } else {
+                    let i = idx - self.automata.len() / 2;
+                    list.push(format!("¬{}", i));
+                }
+            }
+        }
+        list.join("・")
+    }
+
+    fn type1_feedback(&mut self, literals: &[bool], output: bool, s: f64, rng: &mut impl Rng) {
+        for (idx, automaton) in self.automata.iter_mut().enumerate() {
+            if literals[idx] {
+                if output && rng.random_bool((s - 1.0) / s) {
+                    automaton.include_action();
+                }
+            } else {
+                if rng.random_bool(1.0 / s) {
+                    automaton.exclude_action();
+                }
+            }
+        }
+    }
+
+    fn type2_feedback(&mut self, literals: &[bool], output: bool) {
+        if !output {
+            return;
+        }
+
+        for (idx, automaton) in self.automata.iter_mut().enumerate() {
+            if !literals[idx] {
+                automaton.include_action();
+            }
+        }
+    }
+}
+
+impl TsetlinMachine {
+    fn forward(&self, input: &[bool]) -> bool {
+        let not_input: Vec<bool> = input.iter().map(|x| !x).collect();
+        let literals = [input, &not_input].concat();
+
+        let mut sum = 0;
+
+        for clause in &self.clauses {
+            let mut output = true;
+            for (idx, automaton) in clause.automata.iter().enumerate() {
+                if automaton.state > automaton.n_states {
+                    output &= literals[idx];
+                }
+            }
+
+            let c = if clause.polarity { 1 } else { -1 };
+            let out = if output { 1 } else { 0 };
+
+            sum += c * out;
+        }
+
+        sum > 0
+    }
+
+    fn show_params(&self) {
+        for clause in &self.clauses {
+            let polar = if clause.polarity { "+" } else { "-" };
+            let str_params = clause.str_params();
+
+            println!("{polar}: {str_params}");
+        }
+    }
+
+    fn train(&mut self, input: &[bool], label: bool, rng: &mut impl Rng) {
+        let not_input: Vec<bool> = input.iter().map(|x| !x).collect();
+        let literals = [input, &not_input].concat();
+
+        let mut sum = 0;
+        let mut clause_outputs = Vec::with_capacity(self.clauses.len());
+
+        for clause in &self.clauses {
+            let mut output = true;
+            for (idx, automaton) in clause.automata.iter().enumerate() {
+                if automaton.state > automaton.n_states {
+                    output &= literals[idx];
+                }
+            }
+
+            let c = if clause.polarity { 1 } else { -1 };
+            let out = if output { 1 } else { 0 };
+
+            sum += c * out;
+            clause_outputs.push(output);
+        }
+
+        // +なら1、-なら0
+        let v = sum.clamp(-self.threshold_t, self.threshold_t);
+        let t = self.threshold_t as f64;
+
+        // (t - v) / 2t
+        // 2t (clamped_sum = -t) ~ 0 (clamped_sum = t)
+        // 0を確信しているときは1.0、1を確信しているときは0.0
+        // (t + v) / 2t
+        // 2t (clamped_sum = t) ~ 0 (clamped_sum = -t)
+        // 1を確信しているときは1.0、0を確信しているときは0
+        let p = if label {
+            (t - v as f64) / (2.0 * t)
+        } else {
+            (t + v as f64) / (2.0 * t)
+        };
+
+        for (clause, output) in self.clauses.iter_mut().zip(clause_outputs.iter()) {
+            if rng.random_bool(p.clamp(0.0, 1.0)) {
+                if clause.polarity == label {
+                    clause.type1_feedback(&literals, *output, self.s, rng);
+                } else {
+                    clause.type2_feedback(&literals, *output);
+                }
+            }
+        }
+    }
+}
+
+fn main() {
+    let input_data = [[false, false], [true, false], [false, true], [true, true]];
+    let label_data = [false, true, true, false];
+
+    let config = TsetlinMachineConfig {
+        n_clauses: 3,
+        n_features: 2,
+        n_states: 100,
+        s: 3.9,
+        threshold_t: 2,
+    };
+
+    let mut rng = ThreadRng::default();
+
+    let mut machine = config.init(&mut rng);
+    for epoch in 0..200 {
+        for i in 0..4 {
+            let input = input_data[i];
+            let label = label_data[i];
+            machine.train(&input, label, &mut rng);
+        }
+    }
+
+    for i in 0..4 {
+        let input = input_data[i];
+        let label = label_data[i];
+        let ans = machine.forward(&input);
+
+        println!("input[{i}]: {input:?}");
+        println!("label[{i}]: {label}");
+        println!("output[{i}]: {ans}");
+    }
+
+    machine.show_params();
+}
+```
+
+実行例
+```
+input[0]: [false, false]
+label[0]: false
+output[0]: false
+input[1]: [true, false]
+label[1]: true
+output[1]: true
+input[2]: [false, true]
+label[2]: true
+output[2]: true
+input[3]: [true, true]
+label[3]: false
+output[3]: false
+-: 0・1
++: 0・¬1
++: 1・¬0
+```
+
+labelと同じになっているので学習は成功です!
+
+:::
+
+
+## まとめに
+
+今回はTsetlin Machineを解説させていただきました。
+
+これの学習理論としては「ゲーム理論」と呼ばれる理論が用いられていて、しっかり読んでみるのも面白いかもしれません。
+
+最近の研究ではGPUを使って50倍高速化したり、総和の結果をそのまま転用して数字の予測問題(回帰問題)を解いたりしている論文が散見されます。
+
+機械学習及びその研究について少しでも興味を持っていただけると幸いです!
 
 
 
 
-
-参考文献
