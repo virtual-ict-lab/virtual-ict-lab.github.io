@@ -3,10 +3,15 @@
   <id>https://virtual-ict-lab.github.io/</id>
   <title>Virtual ICT Lab</title>
   <subtitle>ICTの学びと実践を共有するブログ</subtitle>
-  <updated>2026-10-14T11:47:04.612Z</updated>
+  <updated>2026-10-16T23:57:35.877Z</updated>
   <generator>@vuepress/plugin-feed</generator>
   <link rel="self" href="https://virtual-ict-lab.github.io/atom.xml"/>
   <link rel="alternate" href="https://virtual-ict-lab.github.io/"/>
+  <category term="雑談"/>
+  <category term="Tech"/>
+  <contributor>
+    <name>boson</name>
+  </contributor>
   <contributor>
     <name>mothue</name>
   </contributor>
@@ -16,6 +21,233 @@
   <contributor>
     <name>Virtual-ICT-Lab</name>
   </contributor>
+  <entry>
+    <title type="text">図書館利用のすゝめ</title>
+    <id>https://virtual-ict-lab.github.io/posts/boson/20261014-library.html</id>
+    <link href="https://virtual-ict-lab.github.io/posts/boson/20261014-library.html"/>
+    <updated>2026-10-14T10:42:50.000Z</updated>
+    <summary type="html"><![CDATA[
+
+<h2>無料で本</h2>
+<p>欲しい本があればリクエストを出せば1ヶ月程度で購入して貸し出してくれます。</p>
+<p><strong>6000円くらいする技術書</strong>も余裕で買ってくれるので、利用しない手はないです。
+リクエストは図書館に行けば出せます。</p>
+<h2>オタク向け多すぎ</h2>
+<p><strong>技術オタク、数学オタク、そこら辺の人間が欲しがる本は大抵あります。</strong></p>
+<p>「ゼロから作るDeep Learning」(ゼロつく)は確か全巻ありましたし、「コンピューターシステムの理論と実装 第二版」(Nand2Tetris)もありますし、「パターン認識と機械学習」も上巻下巻ありますし、「マスタリングTCP/IP 第6版」もありますし、「ゼロからの自作OS入門(みかん本)」もありました。</p>]]></summary>
+    <content type="html"><![CDATA[
+
+<h2>無料で本</h2>
+<p>欲しい本があればリクエストを出せば1ヶ月程度で購入して貸し出してくれます。</p>
+<p><strong>6000円くらいする技術書</strong>も余裕で買ってくれるので、利用しない手はないです。
+リクエストは図書館に行けば出せます。</p>
+<h2>オタク向け多すぎ</h2>
+<p><strong>技術オタク、数学オタク、そこら辺の人間が欲しがる本は大抵あります。</strong></p>
+<p>「ゼロから作るDeep Learning」(ゼロつく)は確か全巻ありましたし、「コンピューターシステムの理論と実装 第二版」(Nand2Tetris)もありますし、「パターン認識と機械学習」も上巻下巻ありますし、「マスタリングTCP/IP 第6版」もありますし、「ゼロからの自作OS入門(みかん本)」もありました。</p>
+<p>また、借りこそしませんでしたが、「CPUの創りかた」もありました。</p>
+<h2>蔵書検索</h2>
+<p>以外と知られていないのですが、普通にインターネットで蔵書検索できます。</p>
+<p><a href="https://libopac-c.kosen-k.go.jp/webopac41/cattab.do" target="_blank" rel="noopener noreferrer">香川高専 蔵書検索 OPAC 検索画面</a>
+<img src="/boson/20261014-library/search.png" alt="蔵書検索画面"></p>
+<h2>本、良いぞ</h2>
+<p>インターネットには無料で最新情報を得ることができるというメリットがあります。</p>
+<p>一方で、本はその手の専門家が執筆と修正を繰り返しながら書かれたものなので、<strong>体系立った知識</strong>を得ることができますし、<strong>情報に対する信頼</strong>もあります。</p>
+<p><s>あと、個人ブログみたいな殴り書き感がないので読みやすいです。</s></p>
+<p>ぜひ皆さん、オタク向けの本が無料で手に入る楽園「図書館」に足を踏み入れましょう!!!</p>
+]]></content>
+    <author>
+      <name>boson</name>
+    </author>
+    <category term="雑談"/>
+    <contributor>
+      <name>boson</name>
+    </contributor>
+    <published>2026-10-14T00:00:00.000Z</published>
+    <rights>Copyright by boson</rights>
+  </entry>
+  <entry>
+    <title type="text">超絶変態機械学習アルゴリズム、Tsetlin Machine (ツェトリンマシン)</title>
+    <id>https://virtual-ict-lab.github.io/posts/boson/20261014-tsetlin-machine.html</id>
+    <link href="https://virtual-ict-lab.github.io/posts/boson/20261014-tsetlin-machine.html"/>
+    <updated>2026-10-16T23:55:15.000Z</updated>
+    <summary type="html"><![CDATA[
+<div class="hint-container info">
+<p class="hint-container-title">関連情報</p>
+<p>この記事は執筆中です．今後随時更新されます．</p>
+</div>
+
+<h2>Hello Machine Learning !</h2>
+<p>機械学習の勉強を初めると、勾配降下法や尤度関数のように確率や統計、微積分の元で作られたアルゴリズムを習うことになります。</p>
+<p>もちろん、そういった現代の機械学習(特に深層学習)の基本となる勾配降下法をベースとしたアルゴリズムはとても面白いので一度は知るべきだとは考えています。</p>
+<p>しかし、殆どの研究者が主流の手法をおしすすめる一方で、世の中には全く新しいことを考える研究者もいます。</p>]]></summary>
+    <content type="html"><![CDATA[
+<div class="hint-container info">
+<p class="hint-container-title">関連情報</p>
+<p>この記事は執筆中です．今後随時更新されます．</p>
+</div>
+
+<h2>Hello Machine Learning !</h2>
+<p>機械学習の勉強を初めると、勾配降下法や尤度関数のように確率や統計、微積分の元で作られたアルゴリズムを習うことになります。</p>
+<p>もちろん、そういった現代の機械学習(特に深層学習)の基本となる勾配降下法をベースとしたアルゴリズムはとても面白いので一度は知るべきだとは考えています。</p>
+<p>しかし、殆どの研究者が主流の手法をおしすすめる一方で、世の中には全く新しいことを考える研究者もいます。</p>
+<p>そうやって生まれたアルゴリズムの一例として<strong>Tsetlin Machine</strong>があります。</p>
+<p>損失関数？行列積？連鎖律？そんな理論は一切使いません。</p>
+<p>勾配降下法？誤差逆伝播法？そんなアルゴリズムも一切使いません。</p>
+<p>なんならゲーム理論とかいう謎分野を理論保証に持っています。</p>
+<p>..............とっっっても「変」じゃないですか!？</p>
+<p>今日はそんな <strong>超絶変態アルゴリズム「Tsetlin Machine」</strong> の概要を説明させていただきます。</p>
+<p>(どうか ツェトリンマシン と発音してください)</p>
+<h2>今日やらないこと</h2>
+<p>理論的な収束性の証明は筆者の理解が浅いため書きません。(いずれ理解して書きたいです)</p>
+<p>最新の研究動向はとても面白いのですがこの記事の主題ではないため書きません、ぜひ気になった方は調べてみてください。(最近はalphaXivとか言う翻訳要約サービスがあるらしいです。)</p>
+<h2>Tsetlin Machineとは？</h2>
+<p>順を追って説明するために、まずは原論文の説明から見ていきましょう。</p>
+<p>論文というと気が引ける方も多いと思いますが、日本語訳と解説を載せるので、雰囲気でも掴んでいってください。</p>
+<p>ここの内容は全て理解できなくても大丈夫です。</p>
+<p>原論文(2018年)</p>
+<p><strong>The Tsetlin Machine -- A Game Theoretic Bandit Driven Approach to Optimal Pattern Recognition with Propositional Logic</strong> (英)</p>
+<p>ツェトリンマシン -- 命題論理による最適パターン認識への、ゲーム理論とバンディット問題に基づくアプローチ。(日)</p>
+<p>[https://arxiv.org/abs/1804.01508]</p>
+<h2>概要(Abstract)</h2>
+
+<h3>用語解説</h3>
+<h4>人工ニューロン、深層ネットワーク</h4>
+<p>現代の深層学習アルゴリズムの基本構造です。
+今回は深掘りしませんが、深層学習のアルゴリズムを超絶簡潔に言うと、</p>
+<p>入力層に入力データを与え、それぞれの層が「前の層の計算結果を使って計算を行い(行列積)、後ろの層に与える」というのを最後の層まで行い予測を行います。</p>
+<p>正解データから誤差を計算して(誤差関数、最小二乗法)、今度は「後ろの層から前の層に誤差を小さくするパラメーターの方向を伝えていき(誤差逆伝播法)、更新する(勾配降下法)」というのを繰り返します。</p>
+<p>最終的に誤差が少ないパラメーターの「モデル」が完成します。</p>
+<p>正直、こんな雑な説明では到底理解できないので、興味があればインターネットや本で調べてみてください!(<a href="/posts/boson/20261014-library.html" target="_blank">図書館のすゝめ</a>)</p>
+<p>とりあえずは「現代の深層学習アルゴリズム」なんだなあと理解していただければ結構です。</p>
+<h4>命題論理、命題論理式</h4>
+<p>入力から論理式があって、それを評価したら真か偽か決まるものです。</p>
+<p>ざっくりと論理式だと思ってください。</p>
+<h4>多腕バンディット問題</h4>
+<p>当たる確率や報酬がバラバラな複数のスロットマシンがあります。選択できる行動は「どのスロットを引くか」です。そんな環境で何回もスロットを引いて試しながら、報酬の最大化を目指します。</p>
+<p><a href="https://www.ai-gakkai.or.jp/resource/my-bookmark/my-bookmark_vol31-no5/" target="_blank" rel="noopener noreferrer">Vol.31.No.5(2016/9)多腕バンディット問題 | 人工知能学会 (The Japanese Society for Artificial Intelligence)</a></p>
+<h4>局所最適解、大域的最適解</h4>
+<p>勾配降下法では、損失関数が小さくなる点に向かって学習するものの、極小値に収まるだけで、全体で見たときの最小値とは限りません。</p>
+<p>誤差関数の極小値のことを局所最適解、最小値のことを大域的最適解と思ってください。</p>
+<h4>SVM、決定木、ランダムフォレスト、ナイーブベイズ分類器、ロジスティック回帰、およびニューラルネットワーク</h4>
+<p>SVM、決定木、ランダムフォレストは大きなif文を作る学習アルゴリズム、
+実用的とされている学習アルゴリズムの一覧だと思ってくささい。</p>
+<h2>Tsetlin Machineが生まれた経緯</h2>
+<p>今のAIブームを作り出した深層学習アルゴリズムには多くのメリットがあり、それ故に主流となっています。</p>
+<p>シンプルかつ、理論保証が厚い、そして、Transformerという構造を用いることで並列計算性が高く、モデルサイズの向上が性能向上に直結する <strong>スケーリング則</strong> があります。</p>
+<p>特にLLMが一部タスクで人間を超えるようになったのはスケーリング則が大いに関連していて、そのあたりの話も非常に面白いのですが、メリットばかりではありません。</p>
+<p>よく言われるデメリットは <strong>「学習/推論時の計算コスト」</strong> と <strong>「解釈可能性」</strong> です。</p>
+<p>学習/推論時の計算コストは馬鹿にならなくて、1回の学習に100万円以上かかるなんてのはザラです。</p>
+<p>(BERTとかでそのレベルなので、今のフロンティアモデルなんてのはどれだけ計算資源を食いつくしているのか想像が付きません...)</p>
+<p>また、解釈可能性も一部の分野で凄く重要となります。</p>
+<p>それは <strong>「医療」</strong> です。</p>
+<p>医療というのは最優先で最先端技術による効率化が必要であるにも関らず、ブラックボックスなAIをシステムに組み込むことは絶対にできません。(技術者倫理)</p>
+<p>そのため、解釈可能性の高いモデルはAIの社会実装において必要なのです。</p>
+<p>その二大問題が解消できる夢のようなアルゴリズム、それがTsetlin Machineです!</p>
+<p>...というと言いすぎもしれませんが、実際にかなり解決に貢献しています。</p>
+<h2>Tsetlin Automaton</h2>
+<p>Tsetlin Machineの元ネタとしてTsetlin Automatonという学習オートマトンがあります。</p>
+<details class="hint-container details"><summary>オートマトンについて</summary>
+<p>オートマトンというのは内部状態を持っていて、状態遷移によって状態が変化する様子をモデル化したものです。</p>
+<p>Wikipediaに掲載されていた図が分かりやすかったので、それを参考に</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/FSM_example_w_comments.png" alt="扉の開閉に関するAutomaton"></p>
+<p>状態遷移先は状態によって違って、行動/条件によっても違います</p>
+<p>これは○が2つありますが、オートマトンが2つあるという図ではなく、オートマトンが持てる <strong>状態が2つある</strong> という意味です。</p>
+<p>複雑な概念ではないので(とは言っても奥は深い)、納得できなければ調べてみてください!</p>
+</details>
+<p>Tsetlin Automatonはとても簡単な構造で、オートマトンと言うからには状態があるのですが、状態には <strong>1つの正の整数</strong> しか持ちません。</p>
+<p>持てる状態の幅として <strong>N</strong> というパラメーターを用意します。</p>
+<p>Nは基本なんでも良いです。ただ、人間が設定する必要があり、性能を左右するパラメーターです。(ハイパーパラメーター)</p>
+<p>Tsetlin Automatonが持てる状態は有限で、<strong>1~2Nの正の整数</strong> です。</p>
+<p><img src="/boson/20261014-tsetlin-machine/ta1.png" alt="TAの図1"></p>
+<p>この正の整数がN以下なら <strong>「含めない」</strong>、N+1は以上なら <strong>「含める」</strong> ということにします。</p>
+<p>具体的に何を含めるのかは後ほど説明しますが、とりあえず飲み込んでください。</p>
+<p><img src="/boson/20261014-tsetlin-machine/ta2.png" alt="TAの図2"></p>
+<p>そして、「含める」「含めない」を選択したことにより、 <strong>「報酬」</strong> か <strong>「罰」</strong> を受けることになります。</p>
+<p>報酬を受けると「含めない」状態なら更に「含めない」方向に、「含める」状態なら「含める」方向に状態を遷移させます。</p>
+<p>罰を受けると「含めない」状態なら「含める」方向に、「含める」状態なら「含めない」方向に状態を遷移させます。</p>
+<p>状態→行動→報酬の流れを聞いて強化学習の枠組みととても良く似てることに気づくかもしれません。</p>
+<p>実際に学習オートマトンは強化学習の先祖の一つで、強化学習の勉強で一番初めに習う「多腕バンディット問題」の解法と似ています。</p>
+<p><img src="/boson/20261014-tsetlin-machine/ta3.png" alt="TAの図3"></p>
+<h2>Tsetlin Machine の推論アルゴリズム</h2>
+<p>機械学習の勉強において重要な考え方として想像していただきたいのは、最終的に作りたいのは <strong>「入力したら出力が得られる関数」</strong> であることです。</p>
+<p>計算機を用いている以上、作れるのは <strong>関数</strong> なのです。</p>
+<p>その関数の内部処理がとても複雑で、入力が数百万次元になっても、関数なのです。</p>
+<p>画像から写っている動物の名前を出力する関数、音声から話している内容を文字に起こす関数、質問から応答を言葉で返す関数、ゲームの次の行動を決める関数...全て入力と出力が存在します。</p>
+<h3>Tsetlin Machineのデータ前処理</h3>
+<p>Tsetlin Machineではこの入力と出力は全て真偽値(boolean)になっています。</p>
+<p>もちろん深層学習では殆ど浮動小数点型(float)ですが、Tsetlin Machineは論理式を扱う関係上、真偽値にする必要があります。</p>
+<p>具体的には、MNISTという手書き数字の白黒画像データセットの場合、それぞれのピクセルに0.0~1.0の明るさがあります。</p>
+<p>そのままではTsetlin Machineでは使えないので、閾値を0.25として、それ以上ならTRUE、未満ならFALSEのように前処理を行います。</p>
+<p>そして、MNISTでは0~10のどの数字が書かれているかを予測する必要があるのですが、 <strong>「0か、0でないか」「1か、1でないか」</strong> という風にすべての数字に対して学習します。</p>
+<p>更に入力には普通の入力と<strong>その否定</strong>があります。</p>
+<p><img src="/boson/20261014-tsetlin-machine/function.png" alt="関数を作る"></p>
+<h3>Clause</h3>
+<p>Tsetlin Machineを構成する構造として、Clause(節)があります。</p>
+<p>個人的に「節」という訳はあまり好きではないので、Clauseと呼ばせてください。</p>
+<p>Clauseの全体像はこんなかんじです。</p>
+<p><img src="/boson/20261014-tsetlin-machine/clause.png" alt="clauseの図"></p>
+<p>Tsetlin Automaton: N=50</p>
+<p>入力の次を見てみると、Tsetlin Automatonが沢山あるのが見えると思います。</p>
+<p>入力と入力の否定の全てにTsetlin Automatonが一つ割り当てられていて、Tsetlin Automatonの状態が <strong>Nより大きければ</strong>その入力を含め、<strong>N以下であれば</strong>含めません。</p>
+<p>言い換えるとTsetlin Automatonに報酬や罰を与えることで<strong>入力を含めるか含めないかを制御</strong>できます。</p>
+<p>全ての入力を論理積(AND)で繋ぎ、その出力にClauseに割り当てられた符号(+/-)を付けることでClauseの出力が完成します。</p>
+<p>ここまで説明してようやく全体像を説明することができます。</p>
+<h3>Tsetlin Machineの推論の全体像</h3>
+<p><img src="/boson/20261014-tsetlin-machine/tsetlin.png" alt="tsetlin machineの図"></p>
+<p>Clauseの数: 4</p>
+<p>このようにClauseを+/-それぞれ半数ずつ用意します。</p>
+<p>今回はClauseの数を4つに設定します。</p>
+<p>入力と入力の否定を用意して、それぞれを各Clauseに接続します。</p>
+<p>そして、Clauseからは±(0または1)が出てくるはずで、その総和を取ります。</p>
+<p>ここで注意したいのは0/1はClause内で途中まで真偽値として扱っていましたが、符号を付けた後からは数字の0と1として扱います。</p>
+<p>総和が取れたら、0以上ならTRUE、0未満ならFALSEとして、最終出力が決定されます。</p>
+<h2>Tsetlin Machineの学習アルゴリズム</h2>
+<h3>注意点</h3>
+<p>Tsetlin Automatonで報酬と罰の概念を解説したのですが、実はTsetlin Machineではこの <strong>報酬と罰の要素は使いません</strong> 。</p>
+<p>というのももっと単純な <strong>「含める方向に進める(include)」</strong> と <strong>「含めない方向に進める(exclude)」</strong> で扱います。</p>
+<p>これがTsetlin Machineが初見で理解できない原因だと考えています。</p>
+<p><img src="/boson/20261014-tsetlin-machine/ta4.png" alt="tsetlin machineの図"></p>
+<p>ただ、1から2Nの正の整数のみを状態に持つオートマトンであり、N以下は「含めない」、N以上は含めるという要素は変わりません。</p>
+<h3>Feedback</h3>
+<p>説明の簡略化のためにClauseに対してFeedbackという操作を定義します。
+また、sという人間が調整するパラメーターを用意します。これは、確率操作を行うためのパラメーターです。s=3.9が推奨されています。</p>
+<h4>Type I Feedback</h4>
+<p>Feedbackはオートマトンごとに操作を行うのですが、Type Iには2つ操作があります。
+オートマトンが担当する入力が1でClauseの出力も1なら、[1]を取り、それ以外なら[2]を取ります。</p>
+<p>[1]  <span v-pre class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow><mi>s</mi></mfrac></mrow><annotation encoding="application/x-tex">\frac{s-1}{s}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>の確率で「含める方向に進める」</p>
+<p>[2]  <span v-pre class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mi>s</mi></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{s}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>の確率で「含めない方向に進める」</p>
+<h4>Type II feedback</h4>
+<p>Type IIはシンプルです。</p>
+<p>Clauseの出力が1で、担当している入力が0のオートマトンを「含める方向に進める」</p>
+<h3>学習</h3>
+<p>推論時に出した総和を元に、Feedbackを適用するかどうかを確率的に決めます。</p>
+<p>総和が正しい方向に大きいほど、Feedbackを適用する確率が下ります。</p>
+<p>これは、精度が高いほど修正する必要が少ないためです。</p>
+<p>初期状態では五分五分くらいです。</p>
+<p>具体的なFeedbackの適用確率の計算式はこのようになっています。(Tは人間が設定するパラメーター)</p>
+<p><span v-pre class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>l</mi><mi>a</mi><mi>u</mi><mi>s</mi><msub><mi>e</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">clause_{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord mathnormal">c</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal">u</span><span class="mord mathnormal">s</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>は<span v-pre class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span></span></span></span>番目のClauseの出力を表しています。</p>
+<p v-pre class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>v</mi><mo>=</mo><mrow><mi mathvariant="normal">c</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">p</mi></mrow><mo stretchy="false">(</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>c</mi><mi>l</mi><mi>a</mi><mi>u</mi><mi>s</mi><mi>e</mi><mtext>の数</mtext></mrow></munderover><mi>c</mi><mi>l</mi><mi>a</mi><mi>u</mi><mi>s</mi><msub><mi>e</mi><mi>k</mi></msub><mo separator="true">,</mo><mo>−</mo><mi>T</mi><mo separator="true">,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">v = \mathrm{clip}(\sum_{k=1}^{clauseの数}clause_{k}, -T, T)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:3.1382em;vertical-align:-1.3021em;"></span><span class="mord"><span class="mord mathrm">clip</span></span><span class="mopen">(</span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8361em;"><span style="top:-1.8479em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight" style="margin-right:0.0197em;">l</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">se</span><span class="mord cjk_fallback mtight">の数</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.3021em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">c</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal">u</span><span class="mord mathnormal">s</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">−</span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mclose">)</span></span></span></span></span></p>
+<p v-pre class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>p</mi><mo>=</mo><mrow><mo fence="true">{</mo><mtable rowspacing="0.36em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mo stretchy="false">(</mo><mi>T</mi><mo>−</mo><mi>v</mi><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mn>2</mn><mi>T</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mo stretchy="false">(</mo><mtext>正解が</mtext><mn>1</mn><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mo stretchy="false">(</mo><mi>T</mi><mo>+</mo><mi>v</mi><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mn>2</mn><mi>T</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mo stretchy="false">(</mo><mtext>正解が</mtext><mn>0</mn><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">p = \begin{cases}
+  (T-v)/2T &amp; (正解が1)\\
+  (T+v)/2T &amp; (正解が0)
+\end{cases}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:3em;vertical-align:-1.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="mclose">)</span><span class="mord">/2</span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="mclose">)</span><span class="mord">/2</span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:1em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mopen">(</span><span class="mord cjk_fallback">正解が</span><span class="mord">1</span><span class="mclose">)</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mopen">(</span><span class="mord cjk_fallback">正解が</span><span class="mord">0</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>実際に正解が1の時のpを考えると、v=t(予測が1で確信している)のときに確率0.0、v=-t(予測が0で確信している)のときに確率1.0であり、望み通りの式であることがわかります。</p>
+<p>そして、Feedbackが適用されることが確定したら、このようにFeedbackを割り当てます。</p>
+<p>|  | 符号が+ | 符号が- |
+|</p>
+]]></content>
+    <author>
+      <name>boson</name>
+    </author>
+    <category term="Tech"/>
+    <contributor>
+      <name>boson</name>
+    </contributor>
+    <published>2026-10-14T00:00:00.000Z</published>
+    <rights>Copyright by boson</rights>
+  </entry>
   <entry>
     <title type="text">VuePress 自分流爆速構築ガイド(2026年版)</title>
     <id>https://virtual-ict-lab.github.io/posts/mothue/20261013-init-vuepress.html</id>
